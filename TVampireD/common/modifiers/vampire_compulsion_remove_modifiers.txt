@@ -1,0 +1,9 @@
+﻿remove_compelled_trait = {
+    # No stat effects - this just removes the trait when it expires
+    # The localization will show "but remember compulsion won't last forever"
+}
+
+remove_original_compelled_trait = {
+    # No stat effects - this just removes the trait when it expires
+    # The localization will show "but remember compulsion won't last forever"  
+}

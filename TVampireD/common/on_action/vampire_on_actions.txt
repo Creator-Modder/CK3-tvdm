@@ -1,0 +1,231 @@
+﻿# Vampire On Actions for TVampireD Mod
+# Place this file in: common/on_action/vampire_on_actions.txt
+
+# Hook into base game on_actions without overriding
+on_game_start_after_lobby = {
+	on_actions = {
+		vampire_mod_game_start
+		vampire_ruler_designer_check
+		vampire_xp_ruler_designer_check
+		tvampired_show_versioninfo
+	}
+}
+
+# Vampire Mod On Actions - Non-interfering with base game
+
+# **NEW** - Mod-specific game start actions
+vampire_mod_game_start = {
+	effect = {
+		# Handle existing vampires beautification
+		every_living_character = {
+			limit = {
+				OR = {
+					has_trait = vampire
+					has_trait = original_vampire
+					has_trait = original_hybrid
+				}
+				NOR = {
+					has_trait = beauty_good_1
+					has_trait = beauty_good_2
+					has_trait = beauty_good_3
+					has_trait = disfigured
+				}
+				NOT = { has_character_flag = vampire_beautification_applied }
+			}
+			add_trait_force_tooltip = beauty_good_3
+			add_character_flag = vampire_beautification_applied
+		}
+	}
+}
+
+# **NEW** - Ruler Designer vampire initialization
+vampire_ruler_designer_check = {
+	effect = {
+		every_player = {
+			if = {
+				limit = { 
+					OR = {
+						has_trait = vampire
+						has_trait = original_vampire
+						has_trait = original_hybrid
+					}
+				}
+				add_character_flag = vampire_init_from_rd
+				vampire_initialize_visual_age = yes
+				# Add beautification for RD vampires
+				if = {
+					limit = { 
+						NOR = {
+							has_trait = beauty_good_1
+							has_trait = beauty_good_2
+							has_trait = beauty_good_3
+							has_trait = disfigured
+						}
+					}
+					add_trait_force_tooltip = beauty_good_3
+				}
+			}
+		}
+	}
+}
+
+
+# Age maintenance on action
+on_monthly_pulse = {
+	effect = {
+		# Age maintenance (existing)
+		every_living_character = {
+			limit = {
+				OR = {
+					has_trait = vampire
+					has_trait = original_vampire
+					has_trait = original_hybrid
+				}
+			}
+			trigger_event = vampire_age_maintenance.0004
+		}
+	}
+}
+
+# Use random_yearly_everyone_pulse
+random_yearly_everyone_pulse = {
+	on_actions = {
+		vampire_recover_immortal_wounds
+		vampire_lifestyle_xp_check
+		vampire_check_lifetime_flags
+		vampire_check_compulsion_expiry
+	}
+}
+
+# New on_action following V&L pattern
+vampire_recover_immortal_wounds = {
+	trigger = {
+		OR = {
+			has_trait = vampire
+			has_trait = original_vampire
+			has_trait = original_hybrid
+		}
+		vampire_has_disease_or_injury = yes
+	}
+	effect = {
+		vampire_regenerative_healing = yes
+	}
+}
+
+# Vampire XP Tracking System
+vampire_lifestyle_xp_check = {
+	trigger = {
+		has_trait = vampire
+		has_trait_xp = {
+			trait = vampire
+			value < 100
+		}
+	}
+
+	effect = {
+		if = {
+			limit = {
+				var:vampire_years_since_xp_gain >= 3
+			}
+			
+			add_vampire_lifestyle_xp_tick = yes
+
+			set_variable = {
+				name = vampire_years_since_xp_gain
+				value = 0
+			}
+		}
+		else = {
+			change_variable = {
+				name = vampire_years_since_xp_gain
+				add = 1
+			}
+		}
+	}
+}
+
+# Check if player started with vampire trait from ruler designer
+vampire_xp_ruler_designer_check = {
+	effect = {
+		every_player = {
+			if = {
+				limit = { 
+					has_trait = vampire
+					NOT = { has_variable = vampire_years_since_xp_gain }
+				}
+				set_variable = {
+					name = vampire_years_since_xp_gain
+					value = 0
+				}
+				# Initialize lifetime reset tracking for ruler designer vampires
+				vampire_init_years_since_lifetime_reset = yes
+			}
+		}
+	}
+}
+
+# Vampire Lifetime Flags Reset System
+vampire_check_lifetime_flags = {
+	trigger = {
+		has_trait = vampire
+		has_trait = original_vampire
+		has_trait = original_hybrid
+		vampire_has_lifetime_flags = yes
+	}
+	effect = {
+		vampire_add_years_since_lifetime_reset = yes
+		if = { 
+			limit = { 
+				var:vampire_years_since_lifetime_reset >= 50
+			} 
+			vampire_reset_years_since_lifetime_reset = yes
+			vampire_remove_lifetime_flags = yes
+		}
+	}
+}
+
+
+# Compulsion Expiry Check System
+vampire_check_compulsion_expiry = {
+	trigger = {
+		OR = {
+			AND = {
+				has_trait = compelled
+				NOT = { has_character_modifier = remove_compelled_trait }
+			}
+			AND = {
+				has_trait = original_compelled
+				NOT = { has_character_modifier = remove_original_compelled_trait }
+			}
+		}
+	}
+	effect = {
+		# Remove compelled trait if modifier expired
+		if = {
+			limit = { 
+				has_trait = compelled
+				NOT = { has_character_modifier = remove_compelled_trait }
+			}
+			remove_trait = compelled
+		}
+		
+		# Remove original_compelled trait if modifier expired  
+		if = {
+			limit = { 
+				has_trait = original_compelled
+				NOT = { has_character_modifier = remove_original_compelled_trait }
+			}
+			remove_trait = original_compelled
+		}
+	}
+}
+
+
+
+tvampired_show_versioninfo = {
+	effect = {
+		every_player = {
+			trigger_event = tvampired.0001  #version info prompt
+		}
+	}
+}

@@ -1,0 +1,82 @@
+﻿# Trigger for getting injured or sick
+
+vampire_has_disease_or_injury = {
+	OR = {
+        has_trait = cancer
+		has_trait = great_pox
+		has_trait = gout_ridden
+		has_trait = ill
+		has_trait = pneumonic
+		has_trait = typhus
+		has_trait = smallpox
+		has_trait = bubonic_plague
+		has_trait = leper
+		has_trait = consumption
+		has_trait = lovers_pox
+		has_trait = measles
+		has_trait = dysentery
+		has_trait = wounded_1
+        has_trait = wounded_2
+        has_trait = wounded_3
+		has_trait = scarred
+		has_trait = maimed
+		has_trait = one_eyed
+		has_trait = one_legged
+		has_trait = disfigured
+		has_trait = infirm
+		has_trait = incapable
+		has_trait = blind
+		has_trait = ergotism
+		has_trait = beardless_eunuch
+		has_trait = eunuch_1
+		has_character_modifier = gangrene_modifier
+		has_character_modifier = infected_wound_modifier
+		has_character_modifier = malnourished_modifier
+		has_character_modifier = obese_modifier
+	}
+}
+
+vampire_has_lifetime_flags = {
+	OR = {
+		has_character_flag = has_refunded_perks
+		has_character_flag = declared_major_religious_war_flag
+		has_character_flag = has_created_a_faith
+		has_character_flag = converted_culture_this_lifetime
+		has_character_flag = used_lifetime_invasion
+		has_character_flag = used_lifetime_subjugation
+	}
+}
+
+
+# Trigger to check if character has diseases or injuries that can be healed (excluding wounds)
+vampire_has_healable_condition = {
+	OR = {
+		# Diseases
+		has_trait = cancer
+		has_trait = great_pox
+		has_trait = gout_ridden
+		has_trait = ill
+		has_trait = pneumonic
+		has_trait = typhus
+		has_trait = smallpox
+		has_trait = bubonic_plague
+		has_trait = leper
+		has_trait = consumption
+		has_trait = lovers_pox
+		has_trait = measles
+		has_trait = dysentery
+		
+		# Physical ailments (excluding wounds)
+		has_trait = scarred
+		has_trait = maimed
+		has_trait = one_eyed
+		has_trait = one_legged
+		has_trait = disfigured
+		has_trait = infirm
+		has_trait = incapable
+		
+		# Modifiers
+		has_character_modifier = gangrene_modifier
+		has_character_modifier = infected_wound_modifier
+	}
+}

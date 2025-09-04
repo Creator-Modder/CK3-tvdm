@@ -1,0 +1,14 @@
+﻿# Save this as: common/trigger_localization/supernatural_character_interaction_triggers.txt
+
+#Adoption/Add To House Triggers
+supernatural_adopt_not_too_old = {
+	global = supernatural_adopt_not_too_old
+}
+
+supernatural_adopt_not_in_line_for_succession = {
+	global = supernatural_adopt_not_in_line_for_succession
+}
+
+supernatural_adopt_has_no_close_family = {
+	global = supernatural_adopt_has_no_close_family
+}

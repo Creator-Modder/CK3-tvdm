@@ -1,0 +1,47 @@
+﻿vampire_army = {
+	type = heavy_infantry
+
+	can_recruit = {
+		OR = {
+			has_trait = original_vampire		
+			has_trait = original_hybrid
+            has_trait_xp = {
+				trait = vampire
+				track = vampire
+				value >= 50
+			}
+		}
+	}
+	
+	damage = 245
+	toughness = 250
+	pursuit = 165
+	screen = 250
+	siege_value = 0.9
+
+	terrain_bonus = {
+		taiga = { damage = 40 pursuit = 35 screen = 25 }
+		forest = { damage = 40 pursuit = 35 screen = 25 }
+		desert = { damage = -10 toughness = -10 }
+		hills = { damage = -15 }
+	}
+
+	counters = {
+		light_cavalry = 0.30
+		heavy_infantry = 0.45
+		pikemen = 0.15
+		skirmishers = 0.50
+		archers = 0.05
+	}
+
+	buy_cost = { gold = 450 }
+	low_maintenance_cost = { gold = 4 }
+	high_maintenance_cost = { gold = 9 }
+	
+	
+	stack = 5
+	max_sub_regiments = 4
+	icon = "vampire_army"
+
+	ai_quality = { value = culture_ai_weight_skirmishers }
+}

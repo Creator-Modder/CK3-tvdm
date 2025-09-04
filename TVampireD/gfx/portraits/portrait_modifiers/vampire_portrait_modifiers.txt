@@ -1,0 +1,223 @@
+﻿# Vampire Portrait Modifiers for TVampireD Mod
+# Place this file in: gfx/portraits/portrait_modifiers/vampire_portrait_modifiers.txt
+
+# Vampire Hair Anti-Baldness System
+vampire_hair_situational = {
+	usage = game
+	priority = 15  # Higher priority than normal aging
+
+	vampire_no_baldness = {
+		dna_modifiers = {
+			morph = {
+				mode = add
+				gene = gene_balding_hair_effect
+				template = no_baldness
+				value = 1
+			}		
+		} 
+		weight = {
+			base = 0
+			modifier = {
+				add = 1000  # Guaranteed application
+				OR = {
+					has_trait = vampire
+					has_trait = original_vampire
+					has_trait = original_hybrid
+				}
+			}
+		}
+	}
+
+	# Override all baldness stages for vampires
+	vampire_override_baldness_stage_1 = { 
+		dna_modifiers = {
+			morph = {
+				mode = add
+				gene = gene_balding_hair_effect
+				template = no_baldness
+				value = 1
+			}
+		} 
+		weight = {
+			base = 0
+			modifier = {
+				add = 1000
+				OR = {
+					has_trait = vampire
+					has_trait = original_vampire
+					has_trait = original_hybrid
+				}
+			}
+		}		  	
+	}
+
+	vampire_override_baldness_stage_2 = { 
+		dna_modifiers = {
+			morph = {
+				mode = add
+				gene = gene_balding_hair_effect
+				template = no_baldness
+				value = 1
+			}
+		} 
+		weight = {
+			base = 0
+			modifier = {
+				add = 1000
+				OR = {
+					has_trait = vampire
+					has_trait = original_vampire
+					has_trait = original_hybrid
+				}
+			}
+		}		  	
+	}
+}
+
+# Vampire Muscle Preservation System (MALE ONLY)
+vampire_muscularity = {
+	usage = game
+	priority = 15  # Higher priority than normal body changes
+
+	vampire_preserved_muscle = {
+		ignore_outfit_tags = yes
+		dna_modifiers = {
+			morph = {
+				mode = modify
+				gene = gene_bs_body_shape
+				value = {
+					value = 0
+
+					# Enhanced muscularity for MALE vampires only
+					if = {
+						limit = {
+							is_female = no  # Only apply to males
+							OR = {
+								has_trait = vampire
+								has_trait = original_vampire
+								has_trait = original_hybrid
+							}
+						}
+						
+						# Base vampire muscle definition
+						add = 0.5  # Strong, athletic build
+						
+
+						# Account for any physical traits they had
+						if = { limit = { has_trait = physique_good_3 } add = 0.2 }
+						else_if = { limit = { has_trait = physique_good_2 } add = 0.15 }
+						else_if = { limit = { has_trait = physique_good_1 } add = 0.1 }
+						
+						if = { limit = { has_trait = strong } add = 0.1 }
+						if = { limit = { has_trait = athletic } add = 0.05 }
+						
+						# Override any negative physical traits
+						if = { limit = { has_trait = physique_bad_1 } add = 0.4 }  # Cancel and enhance
+						if = { limit = { has_trait = physique_bad_2 } add = 0.6 }  # Cancel and enhance
+						if = { limit = { has_trait = physique_bad_3 } add = 0.8 }  # Cancel and enhance
+						if = { limit = { has_trait = weak } add = 0.4 }
+					}
+
+					max = 1.0
+					min = 0.0  # Allow normal range for females, enhanced minimum for males
+				}
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 1000  # Guaranteed application
+				is_female = no  # Only apply to males
+				OR = {
+					has_trait = vampire
+					has_trait = original_vampire
+					has_trait = original_hybrid
+				}
+			}
+		}
+	}
+}
+
+# Vampire Female Physique Preservation System (FEMALE ONLY)
+vampire_female_physique = {
+	usage = game
+	priority = 15  # Higher priority than normal body changes
+
+	vampire_preserved_female_physique = {
+		ignore_outfit_tags = yes
+		dna_modifiers = {
+			morph = {
+				mode = modify
+				gene = gene_bs_body_shape
+				value = {
+					value = 0
+
+					# Consistent physique for FEMALE vampires only
+					if = {
+						limit = {
+							is_female = yes  # Only apply to females
+							OR = {
+								has_trait = vampire
+								has_trait = original_vampire
+								has_trait = original_hybrid
+							}
+						}
+						
+						# Base preservation - just enough to prevent atrophy
+						add = 0.1  # Minimal enhancement, just consistency
+						
+
+						# Only counter negative physical traits, don't enhance positive ones
+						if = { limit = { has_trait = physique_bad_1 } add = 0.2 }  # Counter atrophy
+						if = { limit = { has_trait = physique_bad_2 } add = 0.3 }  # Counter atrophy
+						if = { limit = { has_trait = physique_bad_3 } add = 0.4 }  # Counter atrophy
+						if = { limit = { has_trait = weak } add = 0.2 }  # Counter weakness
+					}
+
+					max = 1.0
+					min = 0.0
+				}
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 1000  # Guaranteed application
+				is_female = yes  # Only apply to females
+				OR = {
+					has_trait = vampire
+					has_trait = original_vampire
+					has_trait = original_hybrid
+				}
+			}
+		}
+	}
+}
+
+# Vampire Weight Stability System
+vampire_weight = {
+	usage = game
+	priority = 15
+
+	vampire_ideal_weight = {
+		ignore_outfit_tags = yes
+		dna_modifiers = {
+			morph = {
+				mode = modify
+				gene = gene_bs_body_type
+				value = 0.0  # Ideal weight, no modifications
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 1000  # Override any weight changes
+				OR = {
+					has_trait = vampire
+					has_trait = original_vampire
+					has_trait = original_hybrid
+				}
+			}
+		}
+	}
+}

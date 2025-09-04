@@ -1,0 +1,245 @@
+﻿l_english:
+
+# (Original)Vampire Traits and Effects Localization
+
+    trait_vampire:0 "Vampire"
+    trait_vampire_desc:0 "A vampire. Possessing immense strength, speed, and perception, all senses hightened, immortal and cannot fall to disease."
+    trait_vampire_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] is a vampire, experiencing the strengths, speed, and cunning that come with vampirism. [ROOT.GetCharacter.GetSheHe] walks among mortals forever fighting a vampire's predatory nature or embracing it."
+    vampire:0 "Vampire"
+
+    trait_track_vampire:0 "Vampiric Mastery"
+    trait_track_vampire_desc:0 "As centuries pass, this vampire grows stronger and more experienced in their newfound supernatural existance."
+   
+    trait_original_vampire:0 "Original Vampire"
+    trait_original_vampire_desc:0 "One of the first. An ancient vampire of unimaginable power, impossible to kill by normal means."
+    trait_original_vampire_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] is one of the Original Vampires — ancient, powerful, and nearly unstoppable. The blood of all vampires can be traced back to [ROOT.GetCharacter.GetHerHim], and [ROOT.GetCharacter.GetHerHis] presence exudes supernatural authority."
+
+    trait_original_hybrid:0 "Original Hybrid"
+    trait_original_hybrid_desc:0 "The very first vampire/werewolf hybrid, The Original Hybrid, though cursed to keep the werewolf side dormant, [ROOT.GetCharacter.GetSheHe] is still the most powerful being in existence."
+    trait_original_hybrid_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] is an Original Hybrid, and that is all that needs to be said."
+
+# Compelled Trait Localization
+ 
+    trait_compelled:0 "Compelled"
+    trait_compelled_desc:0 "This character is under a vampire's compulsion. Their will is not completely their own, but they feel strangely confident and energized by their supernatural bond."
+    trait_compelled_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] has been compelled by a vampire. Though [ROOT.GetCharacter.GetSheHe] retains most of [ROOT.GetCharacter.GetHerHis] faculties, [ROOT.GetCharacter.GetSheHe] feels an unnatural loyalty and finds [ROOT.GetCharacter.GetHerselfHimself] acting with newfound confidence and boldness."
+
+# Original Compelled Trait Localization
+
+    trait_original_compelled:0 "Compelled by Original Vampire"
+    trait_original_compelled_desc:0 "This character is under the compulsion of an Original Vampire. Their will is significantly influenced, and they feel a deep, loyal connection to their master."
+    trait_original_compelled_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] has been compelled by an Original Vampire. The bond is powerful and unbreakable, granting [ROOT.GetCharacter.GetHerHim] a sense of purpose and obedience that transcends ordinary loyalty."
+
+# Vampire Interaction Compulsion Localization
+
+    vampire_compulsion_interaction:0 "Vampiric Compulsion"
+    vampire_compulsion_interaction_desc:0 "Use your vampiric compulsion on [recipient.GetShortUIName]. They will become bound to your will, unable to resist your commands."
+
+# Original Vampire Compulsion Interaction Localization
+
+    original_vampire_compulsion_interaction:0 "An Original Vampire's Compulsion"
+    original_vampire_compulsion_interaction_desc:0 "As an Original Vampire, use your superior compulsion abilities on [recipient.GetShortUIName]. Your compulsion powers can bend even other normal vampires to your will."
+
+# Opinion Modifiers for compulsions
+
+    compelled_opinion:0 "Compelled by Vampire"
+
+# Turn Vampire Interaction Localization
+
+    turn_vampire_interaction:0 "Turn into a Vampire"
+    turn_vampire_interaction_desc:0 "Offer to turn [recipient.GetShortUIName] into a vampire. If they accept, they will become a new vampire, gaining all the powers and urges that come with it."
+  
+# Vampire Disease Immunity Events
+
+    vampire_immunity.0001.t:0 "Vampiric Regeneration"
+    vampire_immunity.0001.desc:0 "Your supernatural vampiric nature purges all ailments from your immortal body, healing wounds and curing diseases with preternatural speed."
+
+# Vampire Age Visual Maintenance
+
+    vampire_age_maintenance.0004.t:0 "A Timeless Reflection"
+    vampire_age_maintenance.0004.desc:0 "Your appearance remains perfectly preserved, unaffected by time or decay. The illusion of youth holds steady — just as it always should."
+
+
+# Interaction for blood healing
+
+
+    offer_vampire_blood_healing: "Offer Vampire Blood For Healing"
+    offer_vampire_blood_healing_desc: "Offer your vampire blood to heal [recipient.GetTitledFirstName]'s ailments and diseases."
+ 
+# Events for blood healing
+
+    vampire_blood_healing.0001.t: "Healing Blood"
+    vampire_blood_healing.0001.desc: "I have offered to heal [scope:recipient.GetTitledFirstName] with my vampiric blood. My blood can cure diseases and mend injuries, but what should I ask for in return for this miraculous gift?"
+ 
+    vampire_blood_healing.0001.a: "Ask for Gold"
+    vampire_blood_healing.0001.b: "Ask for Prestige"
+    vampire_blood_healing.0001.c: "Ask for Piety"
+    vampire_blood_healing.0001.d: "Ask for Loyalty and Service"
+    vampire_blood_healing.0001.e: "Ask for Friendship and a Favor"
+ 
+# Modifiers for blood healing
+
+    vampire_blood_dealer: "Vampire Blood Dealer"
+    vampire_blood_dealer_desc: "This character is known for trading vampiric blood for payment, gaining some prestige but losing piety for the unholy practice."
+ 
+    vampire_blood_debt: "Blood Debt"
+    vampire_blood_debt_desc: "This character owes their life to a vampire's healing blood and feels obligated to pay them back."
+ 
+# Opinion modifiers for blood healing
+
+    VAMPIRE_HEALER_OPINION_DESC: "Healed me with vampire blood"
+    VAMPIRE_LIFE_SAVER_OPINION_DESC: "Saved my life with vampire blood"
+    vampire_life_saver_opinion:0 "This vampire saved my life"
+    vampire_healer_opinion:0 "This vampire healed me"
+    vampire_blood_debt:0 "I'm indebted to this vampire"
+
+
+
+
+#Invite to Join House
+
+ supernatural_invite_join_house:0 "Invite to Join House"
+ supernatural_invite_join_house_interaction_desc:0 "Invite to join house [actor.GetHouse.GetName]."
+ supernatural_msg_tooltip_invite_join_house_desc:0 "[THIS.GetCharacter.GetFirstNameNoTooltip] will become a member of house [actor.GetHouse.GetName]."
+ SUPERNATURAL_OFFER_JOIN_HOUSE_INTERACTION_NOTIFICATION:0 "I invite you to join house [actor.GetHouse.GetName]."
+
+#Adopt Into House
+
+ supernatural_adopt_into_house:0 "Offer to Adopt"
+ supernatural_adopt_into_house_interaction_desc:0 "Offer to adopt into house [actor.GetHouse.GetName]."
+ supernatural_msg_tooltip_adopt_into_house_desc:0 "[THIS.GetCharacter.GetFirstNameNoTooltip] will be adopted and become eligible for inheritance within house [actor.GetHouse.GetName]."
+ SUPERNATURAL_OFFER_ADOPTION_INTERACTION_NOTIFICATION:0 "I offer to adopt you into house [actor.GetHouse.GetName]."
+ supernatural_adopt_has_no_close_family:0 "#bold No#! living close family"
+ supernatural_adopt_not_in_line_for_succession:0 "#bold Not#! in line for succession and #bold not#! a ruler"
+ supernatural_adopt_not_too_old:0 "#bold Not#! too old for adoption"
+ 
+
+#Notification for house & adoption
+ vampire_accepted_house:0 "Agreed to Join House"
+ vampire_msg_accepted_house_interaction_message:0 "[THIS.GetCharacter.GetFirstNameNoTooltip] accepted your invitation and joined house [actor.GetHouse.GetName]."
+ vampire_accepted_adoption:0 "Agreed to Adoption"
+ vampire_msg_accepted_adoption_interaction_message:0 "[THIS.GetCharacter.GetFirstNameNoTooltip] accepted your adoption proposal and joined house [actor.GetHouse.GetName]."
+
+
+
+#Siring
+ vampire_trait_sired_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] has been burdened or graced with the darkness of vampirism.\n\n#high Sire: #!#P [ROOT.GetCharacter.MakeScope.Var('sire_character').GetCharacter.GetName] #!"
+
+
+
+# Request Vampire Turn Interaction
+ request_vampire_turn_interaction:0 "Request to be turned into a Vampire"
+ request_vampire_turn_interaction_desc:0 "Ask this vampire to grant you the gift of immortality. This is not a decision to be taken lightly, as it will change your very nature forever."
+ 
+ GOLD_PAYMENT_COST:0 "Payment for vampirism"
+ vampire_turn_request_accept_notification:0 "Vampire Transformation Request Accepted"
+
+ REQUEST_TURN_HIGH_OPINION:0 "I have earned your trust and respect."
+ REQUEST_TURN_STRONG_HOOK:0 "You owe me this favor."
+ REQUEST_TURN_GOLD_PAYMENT:0 "I can offer substantial payment (1000 Gold)."
+ REQUEST_TURN_INSUFFICIENT:0 "Please, I humbly ask, though I offer little in return."
+
+# AI Acceptance Reasons
+ HIGH_OPINION_REASON:0 "High opinion of requester"
+ GOLD_PAYMENT_REASON:0 "Substantial gold payment offered"
+ DESPERATE_REQUEST_REASON:0 "Desperate plea"
+ GREGARIOUS_REASON:0 "Enjoys company"
+ CALLOUS_REASON:0 "Callous nature"
+ PARANOID_REASON:0 "Paranoid about turning others"
+ AMBITIOUS_REASON:0 "Ambitious nature"
+ REQUESTER_AMBITIOUS:0 "Because I must have it"
+ REQUESTER_CONTENT:0 "Maybe I don't need this"
+ SAME_FAITH:0 "Same faith"
+ SAME_CULTURE:0 "Same culture"
+ WEAK_HOOK_REASON:0 "Use Weak Hook"
+ REQUEST_TURN_WEAK_HOOK:0 "Use Weak Hook"
+ strong_test_hook:0 "Strong Hook"
+
+ 
+# Opinion Modifiers for turn request
+ granted_vampirism_opinion:0 "Granted my request for vampirism"
+ refused_vampirism_opinion:0 "Refused to grant me vampirism"
+ new_childe_opinion:0 "My new vampire childe"
+ 
+# Events for turn request
+ vampire_turn_request.0001.t:0 "A Request for the Supernatural Gift"
+ vampire_turn_request.0001.desc_high_opinion:0 "[actor.GetTitledFirstName] approaches you with a request that few mortals would dare make. Their devotion and respect for you has grown considerably, and now they seek the ultimate boon - to join you in eternity. They believe they have earned your trust and proven themselves worthy of the gift of vampirism."
+ vampire_turn_request.0001.desc_strong_hook:0 "[actor.GetTitledFirstName] approaches you with a request for vampirism, and they have leverage over you that makes refusal... difficult. You owe them a significant favor, and they are calling it in for the ultimate prize - immortality itself."
+ vampire_turn_request.0001.desc_gold_payment:0 "[actor.GetTitledFirstName] approaches you with a substantial offer of gold in exchange for the gift of vampirism. One thousand pieces of gold - enough to fund armies or build castles - all for some of your blood that would change their mortal life forever."
+ vampire_turn_request.0001.desc_insufficient:0 "[actor.GetTitledFirstName] approaches you with a desperate request for vampirism, but they offer little in return beyond their humble plea. They seem to understand this is unlikely to succeed, but desperation drives them to try nonetheless."
+ 
+ vampire_turn_request.0001.a:0 "I like you, so yeah, why not."
+ vampire_turn_request.0001.b:0 "I cannot refuse what I owe you. Very well."
+ vampire_turn_request.0001.c:0 "Now that's a hefty sum of gold, I will grant your wish."
+ vampire_turn_request.0001.d:0 "I refuse. Now leave before I change my mind, and just kill you."
+ 
+ vampire_turn_request.0002.t:0 "The Dark within Awakens"
+ vampire_turn_request.0002.desc:0 "The transformation is complete. You feel the supernatural power coursing through your veins, your senses heightened beyond mortal comprehension. The world looks different now - colors more vivid, sounds clearer, and you can hear the heartbeats of mortals around you like drums calling to your newfound hunger. You are no longer human. You are a vampire."
+ vampire_turn_request.0002.a:0 "I embrace this power. I am more than I ever was as a mortal."
+ vampire_turn_request.0002.b:0 "What the... Is this what being a vampire feels like?"
+ vampire_turn_request.0002.c:0 "Not bad, let's see what we can do with this."
+################################################# ------------------------------------------------------
+ vampire_turn_request.0003.t:0 "The Gift Denied"
+ vampire_turn_request.0003.desc:0 "[actor.GetTitledFirstName] has refused your request for vampirism. The sting of rejection burns, knowing that immortality and power were so close yet denied to you. Perhaps in time another opportunity will present itself, or perhaps this was never meant to be your path."
+ vampire_turn_request.0003.a:0 "I understand. Perhaps it was not meant for me."
+ vampire_turn_request.0003.b:0 "I will not forget this refusal."
+################################################# ------------------------------------------------------
+
+
+# Vampire Feeding Interaction Localization
+
+
+
+ vampire_feeding_interaction: "Feed"
+ vampire_feeding_interaction_desc: "Feed on this persons blood to relieve some stress and quell your urges a bit."
+ vampire_feeding_prisoner_interaction: "Drain Prisoner Dry"
+ vampire_feeding_prisoner_interaction_desc: "Drain this prisoner completely and revel in your true nature. Their death will also serve as a perfect display of what happens to those who cross you."
+ 
+# Modifiers for vampire feeding
+
+ vampire_feeding_boost: "Fed on Blood"
+ vampire_feeding_boost_desc: "Your recent feeding has enhanced your supernatural abilities to its full potential."
+ 
+ blood_loss_weakness: "Blood Loss"
+ blood_loss_weakness_desc: "This character feels weak from recent blood loss."
+
+#custom tooltip
+ vampire_feeding_same_location: "Must be in the same location as the target"
+ vampire_recently_fed:0 "You have fed recently and do not need to feed for a while"
+ recently_fed:0 "recently fed"
+ 
+# death
+ death_drained_killer:0 "Drained of Blood"
+
+
+# Intro event
+ tvampired.0001.t:0 "The Ultimate Vampire Mod"
+ tvampired.0001.desc:0 "Welcome to my vampire mod for Crusader Kings III!\n\nThis mod brings the most logically implemented vampires into your medieval world. Experience immortality, supernatural powers, bloodlines, and all the drama that comes with the supernatural.\n\nPrepare yourself for a world where the night belongs to creatures far older and more dangerous than any mortal ruler.\n\nEnjoy the mod! also I'm a newbie mod creator so forgive any shortcomings and errors, what you will see is a very basic mod, so if you want to edit it, change things, add stuff, or fix things, you are very much welcome to it.\n\nI also have no idea if it will work or conflict with any other mods."
+ tvampired.0001.a:0 "Thanks for trying it"
+
+# Vampire Army
+ vampire_army:0 "Vampire Army"
+ vampire_army_flavor:0 "A fearsome force of New Vampires, the Vampire Army strikes terror into the hearts of any who dare to be their enemies. With their supernatural strength and agility, they are a formidable presence on the battlefield."
+
+
+
+# Decision to become an Original Vampire
+ become_original_vampire_decision:0 "Become an Original Vampire"
+ become_original_vampire_decision_desc:0 "The time has come to embrace immortality and power beyond mortal comprehension. With the aid of a powerful witch's ancient knowledge, I can undergo the irreversible transformation with a spell that will make me an Original Vampire - blessed and cursed with eternal life, supernatural strength, and an insatiable hunger for blood."
+ become_original_vampire_decision_tooltip:0 "You can start the spell to become an Original Vampire"
+ 
+ # Confirmation
+ BECOME_ORIGINAL_VAMPIRE_DECISION_CONFIRM_TITLE:0 "Embrace the Darkness?"
+ BECOME_ORIGINAL_VAMPIRE_DECISION_CONFIRM_DESC:0 "Are you certain you wish to undergo this irreversible transformation? Once you become an original vampire, there will be no turning back to your mortal life."
+ BECOME_ORIGINAL_VAMPIRE_DECISION_CONFIRM_ACCEPT:0 "Embrace Immortality"
+ become_original_vampire_decision_confirm:0 "Begin the Ritual"
+
+ # Event
+ vampire_transformation.0001.t:0 "The Transformation"
+ vampire_transformation.0001.desc:0 "As the witch's incantations faded into the night, I drove the blade into my heart. My breath faltered, my soul slipped away... \n\nWhen I awoke, the witch had prepared blood for me. The hunger consumed every thought — so I drank to complete the transition. \n\nIn that instant, everything changed. Heartbeats thundered from every corridor, the scent of mortal blood filled the air, and the darkness revealed itself in perfect clarity. Yet the hunger gnawed still, insatiable and unyielding.  I am no longer human.  I am an Original Vampire — immortal, powerful, and forever changed."
+ vampire_transformation.0001.a:0 "I am Reborn"
+ vampire_transformation.0001.a.tt:0 "You have become an Original Vampire"
+ # Extra loc for the Decision
+ any_close_family_member:0 "Has close family that can be trusted:"
+ any_courtier_or_guest:0 "A trust worthy friend in your court:"
+ 

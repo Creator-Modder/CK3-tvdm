@@ -1,0 +1,24 @@
+﻿namespace = tvampired
+
+# Simple Mod Introduction Event
+tvampired.0001 = { 
+    type = character_event
+    title = tvampired.0001.t
+    desc = tvampired.0001.desc
+    theme = realm
+
+    trigger = {
+        NOT = { exists = global_var:tvampired_intro_shown }
+    }
+
+    immediate = {
+        set_global_variable = {
+            name = tvampired_intro_shown
+            value = yes
+        }
+    }
+
+    option = {
+        name = tvampired.0001.a
+    }
+}

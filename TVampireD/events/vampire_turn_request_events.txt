@@ -1,0 +1,221 @@
+﻿# Create this as: events/vampire_turn_request_events.txt
+
+namespace = vampire_turn_request
+
+# Event for successful vampire transformation
+vampire_turn_request.0002 = {
+    type = character_event
+    title = vampire_turn_request.0002.t
+    desc = vampire_turn_request.0002.desc
+
+    theme = intrigue
+    
+    left_portrait = {
+        character = root              # New vampire (the requester)
+        animation = personality_bold
+    }
+
+    option = {
+        name = vampire_turn_request.0002.a
+        
+        # Embrace the new vampiric nature
+        add_stress = minor_stress_impact_loss
+        
+        # Chance to gain ambitious trait if they don't have personality conflicts
+        if = {
+            limit = { 
+                NOR = { 
+                    has_trait = ambitious
+                    has_trait = content
+                } 
+            }
+            random = {
+                chance = 10
+                add_trait = ambitious
+            }
+        }
+        
+        ai_chance = {
+            base = 60
+            
+            modifier = {
+                add = 30
+                has_trait = ambitious
+            }
+            
+            modifier = {
+                add = -40
+                has_trait = content
+            }
+        }
+    }
+
+    option = {
+        name = vampire_turn_request.0002.b
+        
+        # Feel conflicted about the transformation
+        add_stress = minor_stress_impact_gain
+        
+        # Small chance to develop depression from the change
+        if = {
+            limit = { 
+                NOT = { has_trait = depressed_1 }
+            }
+            random = {
+                chance = 10
+                add_trait = depressed_1
+            }
+        }
+        
+        ai_chance = {
+            base = 40
+            
+            modifier = {
+                add = 20
+                has_trait = content
+            }
+            
+            modifier = {
+                add = 15
+                has_trait = compassionate
+            }
+            
+            modifier = {
+                add = -25
+                has_trait = callous
+            }
+        }
+    }
+    option = {
+        name = vampire_turn_request.0002.c
+
+        ai_chance = {
+            base = 5
+            
+            modifier = {
+                add = 20
+                has_trait = diligent
+            }
+            
+            modifier = {
+                add = 15
+                has_trait = arbitrary
+            }
+        }
+    }
+}
+
+# Event for rejected vampire transformation request
+#vampire_turn_request.0003 = {
+#    type = character_event
+#    title = vampire_turn_request.0003.t
+#    desc = vampire_turn_request.0003.desc
+#
+#    override_background = { 
+#        reference = corridor
+#    }    
+#    theme = intrigue
+#    
+#    left_portrait = {
+#        character = root              # The rejected requester
+#        animation = sadness
+#    }
+#
+#    option = {
+#        name = vampire_turn_request.0003.a
+#        
+#        # Accept the refusal gracefully
+#        add_stress = minor_stress_impact_gain
+#        
+#        # Small chance to gain humble trait if no personality conflicts
+#        if = {
+#            limit = { 
+#                NOR = { 
+#                    has_trait = humble
+#                    has_trait = arrogant
+#                } 
+#            }
+#            random = {
+#                chance = 15
+#                add_trait = humble
+#            }
+#        }
+#        
+#        ai_chance = {
+#            base = 65
+#            
+#            modifier = {
+#                add = 25
+#                has_trait = humble
+#            }
+#            
+#            modifier = {
+#                add = 20
+#                has_trait = forgiving
+#            }
+#            
+#            modifier = {
+#                add = -30
+#                has_trait = vengeful
+#            }
+#            
+#            modifier = {
+#                add = -20
+#                has_trait = arrogant
+#            }
+#        }
+#    }
+#
+#    option = {
+#        name = vampire_turn_request.0003.b
+#        
+#        # Become resentful about the rejection
+#        add_stress = minor_stress_impact_gain
+#        
+#        # This opinion modifier was already added in the interaction's on_decline
+#        # so we don't need to add it again, but we can strengthen it
+#        add_opinion = {
+#            target = scope:recipient  # This should be set by the interaction
+#            modifier = refused_vampirism_opinion
+#            opinion = -10  # Stack additional negative opinion
+#        }
+#        
+#        # Small chance to develop vengeful trait
+#        if = {
+#            limit = { 
+#                NOR = { 
+#                    has_trait = vengeful 
+#                    has_trait = forgiving
+#                } 
+#            }
+#            random = {
+#                chance = 20
+#                add_trait = vengeful
+#            }
+#        }
+#        
+#        ai_chance = {
+#            base = 35
+#            
+#            modifier = {
+#                add = 40
+#                has_trait = vengeful
+#            }
+#            
+#            modifier = {
+#                add = 25
+#                has_trait = arrogant
+#            }
+#            
+#            modifier = {
+#                add = -35
+#                has_trait = forgiving
+#            }
+#            
+#            modifier = {
+#                add = -20
+#                has_trait = humble
+#            }
+#        }
+#    }
+#}

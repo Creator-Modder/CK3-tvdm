@@ -1,0 +1,40 @@
+﻿# Vampire Opinion Modifiers
+# Place this file in: common/opinion_modifiers/vampire_opinion_modifiers.txt
+
+compelled_opinion = {
+	opinion = 100
+	monthly_change = 0
+}
+
+# Opinion modifiers for vampire blood healing
+
+vampire_healer_opinion = {
+    opinion = 50
+    months = 60
+    
+    # Shows in the opinion breakdown
+    desc = "VAMPIRE_HEALER_OPINION_DESC"
+}
+
+vampire_life_saver_opinion = {
+    opinion = 80
+    months = 120
+    
+    # Shows in the opinion breakdown  
+    desc = "VAMPIRE_LIFE_SAVER_OPINION_DESC"
+}
+
+refused_vampirism_opinion = {
+    opinion = -10
+    monthly_change = 0
+}
+
+granted_vampirism_opinion = {
+    opinion = 40
+    monthly_change = 0
+}
+
+new_childe_opinion = {
+    opinion = 20
+    monthly_change = 0
+}

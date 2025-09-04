@@ -1,0 +1,256 @@
+﻿namespace = vampire_blood_healing
+
+# Event for vampire to choose what they want in return for healing
+vampire_blood_healing.0001 = {
+    type = character_event
+    title = vampire_blood_healing.0001.t
+    desc = vampire_blood_healing.0001.desc
+    theme = diplomacy
+    
+    left_portrait = {
+        character = scope:actor
+        animation = idle
+    }
+    
+    right_portrait = {
+        character = scope:recipient
+        animation = sick
+    }
+    
+    immediate = {
+        # Store the recipient for use in options
+        save_scope_as = healing_target
+    }
+    
+    # Option 1: Ask for Gold
+    option = {
+        name = vampire_blood_healing.0001.a
+        
+        scope:recipient = {
+            vampire_regenerative_healing = yes
+            
+            # Pay gold based on their wealth
+            if = {
+                limit = { gold >= 100 }
+                pay_short_term_gold = {
+                    target = scope:actor
+                    gold = 100
+                }
+            }
+            else_if = {
+                limit = { gold >= 50 }
+                pay_short_term_gold = {
+                    target = scope:actor
+                    gold = 50
+                }
+            }
+            else_if = {
+                limit = { gold >= 25 }
+                pay_short_term_gold = {
+                    target = scope:actor
+                    gold = 25
+                }
+            }
+            else = {
+                # If they have very little gold, take what they have
+                pay_short_term_gold = {
+                    target = scope:actor
+                    gold = gold
+                }
+            }
+        }
+        
+        scope:actor = {
+            add_character_modifier = {
+                modifier = vampire_blood_dealer
+                years = 1
+            }
+        }
+        
+        ai_chance = {
+            base = 20
+            modifier = {
+                add = 20
+                scope:actor = { gold < 200 }
+            }
+        }
+    }
+    
+    # Option 2: Ask for Prestige
+    option = {
+        name = vampire_blood_healing.0001.b
+        
+        scope:recipient = {
+            vampire_regenerative_healing = yes
+            
+            # Give prestige based on their current prestige
+            if = {
+                limit = { prestige >= 500 }
+                add_prestige = -200
+                scope:actor = { add_prestige = 200 }
+            }
+            else_if = {
+                limit = { prestige >= 200 }
+                add_prestige = -100
+                scope:actor = { add_prestige = 100 }
+            }
+            else = {
+                add_prestige = -50
+                scope:actor = { add_prestige = 50 }
+            }
+        }
+        
+        ai_chance = {
+            base = 15
+            modifier = {
+                add = 25
+                scope:actor = { prestige < 1000 }
+            }
+        }
+    }
+    
+    # Option 3: Ask for Piety
+    option = {
+        name = vampire_blood_healing.0001.c
+        
+        scope:recipient = {
+            vampire_regenerative_healing = yes
+            
+            # Give piety based on their current piety
+            if = {
+                limit = { piety >= 500 }
+                add_piety = -200
+                scope:actor = { add_piety = 200 }
+            }
+            else_if = {
+                limit = { piety >= 200 }
+                add_piety = -100
+                scope:actor = { add_piety = 100 }
+            }
+            else = {
+                add_piety = -50
+                scope:actor = { add_piety = 50 }
+            }
+        }
+        
+        ai_chance = {
+            base = 10
+            modifier = {
+                add = 30
+                scope:actor = { piety < 1000 }
+            }
+            modifier = {
+                add = -50
+                scope:recipient = { has_trait = zealous }
+            }
+        }
+    }
+    
+    # Option 4: Ask for Loyalty/Service
+    option = {
+        name = vampire_blood_healing.0001.d
+        
+        scope:recipient = {
+            vampire_regenerative_healing = yes
+            
+            # Add loyalty modifier
+            add_character_modifier = {
+                modifier = vampire_blood_debt
+                years = 5
+            }
+            
+            # Add opinion bonus
+            add_opinion = {
+                target = scope:actor
+                modifier = vampire_healer_opinion
+                opinion = 25
+            }
+        }
+        
+        scope:actor = {
+            # Gain a loyalty hook
+            add_hook = {
+                type = loyalty_hook
+                target = scope:recipient
+            }
+        }
+        
+        ai_chance = {
+            base = 25
+            modifier = {
+                add = 20
+                scope:recipient = {
+                    OR = {
+                        is_vassal_of = scope:actor
+                        is_courtier_of = scope:actor
+                    }
+                }
+            }
+        }
+    }
+    
+    # Option 5: Ask for Friendship/Favor
+    option = {
+        name = vampire_blood_healing.0001.e
+        
+        scope:recipient = {
+            vampire_regenerative_healing = yes
+            
+            # Significant opinion boost
+            add_opinion = {
+                target = scope:actor
+                modifier = vampire_life_saver_opinion
+                opinion = 50
+            }
+            
+            # Chance to become friends if not already
+            if = {
+                limit = { 
+                    NOT = { has_relation_friend = scope:actor }
+                    opinion = {
+                        target = scope:actor
+                        value >= 60
+                    }
+                }
+                random = {
+                    chance = 75
+                    set_relation_friend = scope:actor
+                }
+            }
+        }
+        
+        scope:actor = {
+            # Gain a favor hook
+            add_hook = {
+                type = favor_hook
+                target = scope:recipient
+            }
+            
+            # Stress relief from helping someone
+            add_stress = minor_stress_impact_loss
+        }
+        
+        ai_chance = {
+            base = 30
+            modifier = {
+                add = 20
+                scope:actor = {
+                    OR = {
+                        has_trait = compassionate
+                        has_trait = generous
+                        has_trait = honest
+                    }
+                }
+            }
+            modifier = {
+                add = 15
+                scope:recipient = {
+                    OR = {
+                        is_close_family_of = scope:actor
+                        has_relation_friend = scope:actor
+                    }
+                }
+            }
+        }
+    }
+}

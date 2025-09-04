@@ -1,0 +1,7 @@
+﻿# File: common/deathreasons/vampire_kill_deaths.txt
+
+# Death reason for draining
+death_drained = {
+	public_knowledge = yes
+	icon = "death_murder.dds"
+}

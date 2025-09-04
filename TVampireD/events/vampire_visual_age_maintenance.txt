@@ -1,0 +1,24 @@
+﻿# Visual age maintenance event - fires more frequently to prevent aging
+namespace = vampire_age_maintenance
+
+vampire_age_maintenance.0004 = {
+	type = character_event
+	title = vampire_age_maintenance.0004.t
+	desc = vampire_age_maintenance.0004.desc
+	
+	hidden = yes
+	
+	trigger = {
+		OR = {
+			has_trait = vampire
+			has_trait = original_vampire
+			has_trait = original_hybrid
+		}
+	}
+	
+	immediate = {
+		vampire_refresh_visual_age = yes
+	}
+}
+
+

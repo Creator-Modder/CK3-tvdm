@@ -1,0 +1,43 @@
+﻿namespace = vampire_message
+
+vampire_message.9001 = { #Accepted Adoption
+	hidden = yes
+
+	immediate = {
+		scope:actor = {
+			send_interface_message = {
+				type = event_generic_neutral
+				title = vampire_accepted_adoption
+				
+				right_icon = scope:recipient
+
+				show_as_tooltip = {
+					scope:recipient = {
+						custom_tooltip = vampire_msg_accepted_adoption_interaction_message
+					}
+				}
+			}
+		}
+	}
+}
+
+vampire_message.9002 = { #Send join house acceptance message
+	hidden = yes
+
+	immediate = {
+		scope:actor = {
+			send_interface_message = {
+				type = event_generic_neutral
+				title = vampire_accepted_house
+				
+				right_icon = scope:recipient
+
+				show_as_tooltip = {
+					scope:recipient = {
+						custom_tooltip = vampire_msg_accepted_house_interaction_message
+					}
+				}
+			}
+		}
+	}
+}

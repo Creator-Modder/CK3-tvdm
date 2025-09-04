@@ -1,0 +1,91 @@
+﻿become_original_vampire_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/become_original_vampire_decision.dds"
+	}
+	desc = become_original_vampire_decision_desc
+	selection_tooltip = become_original_vampire_decision_tooltip
+	ai_check_interval = 0
+
+	is_shown = {
+		is_imprisoned = no
+		is_adult = yes
+		NOT = { has_trait = original_vampire }
+		NOT = { has_trait = original_hybrid }
+		NOT = { has_trait = vampire }
+	}
+	
+	is_valid_showing_failures_only = {
+		is_at_war = no
+	}
+
+	is_valid = {
+		gold >= 1000
+		prestige >= 2000
+		piety >= 1500
+		OR = {
+			any_courtier_or_guest = {
+				AND = {
+					OR = {
+						has_relation_best_friend = root
+						has_relation_friend  = root
+					}
+					has_trait = witch
+				}
+			}
+			any_close_family_member = {
+				has_trait = witch
+			}
+		}
+	}
+
+	cost = {
+		gold = 1000
+		prestige = 2000
+		piety = 1500
+	}
+
+	confirm_click_sound = "event:/SFX/UI/Notifications/Toast/toast_generic_complete"
+
+	widget = {
+		gui = "decision_view_widget_two_step_yes_no"
+		step_two_flag = "BECOME_ORIGINAL_VAMPIRE_DECISION_CONFIRM"
+		
+		is_visible_step_two = {
+			gold >= 1000
+			prestige >= 2000
+			piety >= 1500
+			OR = {
+				any_courtier_or_guest = {
+					has_relation_best_friend  = root
+					has_trait = witch
+				}
+				any_close_family_member = {
+					has_trait = witch
+				}
+			}
+		}
+
+		step_two_title = "BECOME_ORIGINAL_VAMPIRE_DECISION_CONFIRM_TITLE"
+		step_two_desc = "BECOME_ORIGINAL_VAMPIRE_DECISION_CONFIRM_DESC"
+		
+		step_two_button_positive = "BECOME_ORIGINAL_VAMPIRE_DECISION_CONFIRM_ACCEPT"
+		step_two_button_negative = "GENERIC_CANCEL"
+	}
+
+	effect = {
+		trigger_event = {
+			id = vampire_transformation.0001
+		}
+		show_as_tooltip = {
+			add_trait = original_vampire
+		}	
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}

@@ -1,0 +1,33 @@
+﻿# File: common/modifiers/vampire_modifiers.txt
+
+# Modifier for vampire feeding boost
+vampire_feeding_boost = {
+	icon = "vampire_feeding_boost"
+	
+	# Skill bonuses
+	diplomacy = 2
+	martial = 2
+	stewardship = 2
+	intrigue = 2
+	learning = 2
+	
+	# Prowess bonus
+	prowess_no_portrait = 5
+	
+	# Slower dread decay
+	dread_decay_mult = -0.25
+	
+	# Small monthly piety loss
+	monthly_piety = -0.5
+}
+
+# Modifier for blood loss from feeding
+blood_loss_weakness = {
+	icon = "blood_loss_weakness"
+	
+	# Health penalty from blood loss
+	health = -0.5
+	
+	# Prowess penalty from weakness
+	prowess_no_portrait = -2
+}

@@ -1,0 +1,206 @@
+﻿l_russian:
+
+# (Original)Vampire Traits and Effects Localization - Russian
+
+    trait_vampire:0 "Вампир"
+    trait_vampire_desc:0 "Вампир. Обладает невероятной силой, скоростью и обострёнными чувствами. Бессмертен и невосприимчив к болезням."
+    trait_vampire_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] — вампир, обладающий силой, скоростью и хитростью, что дарует вампиризм. [ROOT.GetCharacter.GetSheHe] живёт среди смертных, вечно борясь с хищной природой вампира или же принимая её."
+    vampire:0 "Вампир"
+
+    trait_track_vampire:0 "Мастерство вампира"
+    trait_track_vampire_desc:0 "С веками этот вампир становится сильнее и опытнее в своей новой сверхъестественной сущности."
+
+    trait_original_vampire:0 "Первородный вампир"
+    trait_original_vampire_desc:0 "Один из первых. Древний вампир невообразимой силы, невозможный для убийства обычными средствами."
+    trait_original_vampire_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] — один из Первородных вампиров: древний, могущественный и почти неудержимый. Кровь всех вампиров восходит к [ROOT.GetCharacter.GetHerHim], а [ROOT.GetCharacter.GetHerHis] присутствие излучает сверхъестественный авторитет."
+
+    trait_original_hybrid:0 "Первородный гибрид"
+    trait_original_hybrid_desc:0 "Первый в мире гибрид вампира и оборотня. Несмотря на проклятие, удерживающее звериную сущность спящей, [ROOT.GetCharacter.GetSheHe] всё же остаётся самым могущественным существом."
+    trait_original_hybrid_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] — Первородный гибрид, и этим всё сказано."
+
+# Compelled Trait Localization
+    trait_compelled:0 "Под внушением"
+    trait_compelled_desc:0 "Этот персонаж находится под внушением вампира. Его воля не полностью принадлежит ему самому, но он ощущает странную уверенность и силу благодаря этой сверхъестественной связи."
+    trait_compelled_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] находится под внушением вампира. Хотя [ROOT.GetCharacter.GetSheHe] сохранил большинство своих способностей, [ROOT.GetCharacter.GetSheHe] чувствует неестественную преданность и действует с новой уверенностью и смелостью."
+
+# Original Compelled Trait Localization
+    trait_original_compelled:0 "Внушение Первородного"
+    trait_original_compelled_desc:0 "Этот персонаж находится под внушением Первородного вампира. Его воля сильно подавлена, и он чувствует глубокую, непреломимую связь со своим хозяином."
+    trait_original_compelled_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] находится под внушением Первородного вампира. Эта связь могущественна и нерушима, даруя [ROOT.GetCharacter.GetHerHim] чувство цели и покорности, превосходящее обычную преданность."
+
+# Vampire Interaction Compulsion Localization
+    vampire_compulsion_interaction:0 "Вампирское внушение"
+    vampire_compulsion_interaction_desc:0 "Используйте своё вампирское внушение на [recipient.GetShortUIName]. Он подчинится вашей воле и не сможет сопротивляться приказам."
+
+# Original Vampire Compulsion Interaction Localization
+    original_vampire_compulsion_interaction:0 "Внушение Первородного"
+    original_vampire_compulsion_interaction_desc:0 "Будучи Первородным вампиром, используйте своё превосходное внушение на [recipient.GetShortUIName]. Ваша власть способна подчинить даже обычных вампиров."
+
+# Opinion Modifiers for compulsions
+    compelled_opinion:0 "Под внушением вампира"
+
+# Turn Vampire Interaction Localization
+    turn_vampire_interaction:0 "Обратить в вампира"
+    turn_vampire_interaction_desc:0 "Предложите обратить [recipient.GetShortUIName] в вампира. Если он согласится, то станет новым вампиром, обретя все силы и жажду крови."
+
+# Vampire Disease Immunity Events
+    vampire_immunity.0001.t:0 "Вампирская регенерация"
+    vampire_immunity.0001.desc:0 "Сверхъестественная природа вашего тела изгоняет все недуги, исцеляя раны и излечивая болезни с невероятной скоростью."
+
+# Vampire Age Visual Maintenance
+    vampire_age_maintenance.0004.t:0 "Вневременное отражение"
+    vampire_age_maintenance.0004.desc:0 "Ваш облик остаётся безупречным, неподвластным времени и тлению. Иллюзия юности не меркнет — как и должно быть."
+    
+# Interaction for blood healing
+    offer_vampire_blood_healing:0 "Предложить кровь для исцеления"
+    offer_vampire_blood_healing_desc:0 "Предложите свою вампирскую кровь, чтобы исцелить недуги и болезни [recipient.GetTitledFirstName]."
+
+# Events for blood healing
+    vampire_blood_healing.0001.t:0 "Целительная кровь"
+    vampire_blood_healing.0001.desc:0 "Я предложил исцелить [scope:recipient.GetTitledFirstName] своей кровью. Она способна излечить болезни и залечить раны. Но что я должен потребовать взамен за этот дар?"
+    vampire_blood_healing.0001.a:0 "Попросить золото"
+    vampire_blood_healing.0001.b:0 "Попросить престиж"
+    vampire_blood_healing.0001.c:0 "Попросить благочестие"
+    vampire_blood_healing.0001.d:0 "Попросить верность и службу"
+    vampire_blood_healing.0001.e:0 "Попросить дружбу и услугу"
+
+# Modifiers for blood healing
+    vampire_blood_dealer:0 "Торговец кровью"
+    vampire_blood_dealer_desc:0 "Этот персонаж известен тем, что обменивает свою кровь на плату. Это приносит ему престиж, но снижает благочестие из-за нечестивой практики."
+    vampire_blood_debt:0 "Долг крови"
+    vampire_blood_debt_desc:0 "Этот персонаж обязан жизнью вампиру и чувствует себя обязанным вернуть долг."
+
+# Opinion modifiers for blood healing
+    VAMPIRE_HEALER_OPINION_DESC:0 "Исцелил меня своей кровью"
+    VAMPIRE_LIFE_SAVER_OPINION_DESC:0 "Спас мою жизнь своей кровью"
+    vampire_life_saver_opinion:0 "Этот вампир спас мою жизнь"
+    vampire_healer_opinion:0 "Этот вампир исцелил меня"
+    vampire_blood_debt:0 "Я в долгу перед этим вампиром"
+
+# Invite to Join House
+    supernatural_invite_join_house:0 "Пригласить в дом"
+    supernatural_invite_join_house_interaction_desc:0 "Пригласить вступить в дом [actor.GetHouse.GetName]."
+    supernatural_msg_tooltip_invite_join_house_desc:0 "[THIS.GetCharacter.GetFirstNameNoTooltip] станет членом дома [actor.GetHouse.GetName]."
+    SUPERNATURAL_OFFER_JOIN_HOUSE_INTERACTION_NOTIFICATION:0 "Я приглашаю вас вступить в дом [actor.GetHouse.GetName]."
+
+# Adopt Into House
+    supernatural_adopt_into_house:0 "Предложить усыновление"
+    supernatural_adopt_into_house_interaction_desc:0 "Предложить усыновление в дом [actor.GetHouse.GetName]."
+    supernatural_msg_tooltip_adopt_into_house_desc:0 "[THIS.GetCharacter.GetFirstNameNoTooltip] будет усыновлён и получит право на наследство в доме [actor.GetHouse.GetName]."
+    SUPERNATURAL_OFFER_ADOPTION_INTERACTION_NOTIFICATION:0 "Я предлагаю усыновить тебя в дом [actor.GetHouse.GetName]."
+    supernatural_adopt_has_no_close_family:0 "#bold Нет#! живых близких родственников"
+    supernatural_adopt_not_in_line_for_succession:0 "#bold Не#! в линии наследования и #bold не#! является правителем"
+    supernatural_adopt_not_too_old:0 "#bold Недостаточно#! молод для усыновления"
+
+# Notifications for house & adoption
+    vampire_accepted_house:0 "Согласие вступить в дом"
+    vampire_msg_accepted_house_interaction_message:0 "[THIS.GetCharacter.GetFirstNameNoTooltip] принял ваше приглашение и вступил в дом [actor.GetHouse.GetName]."
+    vampire_accepted_adoption:0 "Согласие на усыновление"
+    vampire_msg_accepted_adoption_interaction_message:0 "[THIS.GetCharacter.GetFirstNameNoTooltip] принял ваше предложение об усыновлении и вступил в дом [actor.GetHouse.GetName]."
+
+# Siring
+    vampire_trait_sired_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] был обречён или одарён тьмой вампиризма.\n\n#high Создатель: #!#P [ROOT.GetCharacter.MakeScope.Var('sire_character').GetCharacter.GetName] #!"
+
+# Request Vampire Turn Interaction
+    request_vampire_turn_interaction:0 "Попросить обратить в вампира"
+    request_vampire_turn_interaction_desc:0 "Попросите этого вампира даровать вам бессмертие. Это решение изменит вашу сущность навсегда."
+    GOLD_PAYMENT_COST:0 "Плата за обращение"
+    vampire_turn_request_accept_notification:0 "Запрос на обращение в вампира принят"
+
+    REQUEST_TURN_HIGH_OPINION:0 "Я заслужил твоё доверие и уважение."
+    REQUEST_TURN_STRONG_HOOK:0 "Ты обязан мне этой услугой."
+    REQUEST_TURN_GOLD_PAYMENT:0 "Я могу предложить щедрую плату (1000 золотых)."
+    REQUEST_TURN_INSUFFICIENT:0 "Пожалуйста, я смиренно прошу, хотя мне нечего предложить."
+
+# AI Acceptance Reasons
+    HIGH_OPINION_REASON:0 "Высокое мнение о просителе"
+    GOLD_PAYMENT_REASON:0 "Предложена щедрая плата"
+    DESPERATE_REQUEST_REASON:0 "Отчаянная просьба"
+    GREGARIOUS_REASON:0 "Любит общество"
+    CALLOUS_REASON:0 "Бесчувственная натура"
+    PARANOID_REASON:0 "Паранойя по поводу обращения других"
+    AMBITIOUS_REASON:0 "Амбициозная натура"
+    REQUESTER_AMBITIOUS:0 "Потому что я должен это иметь"
+    REQUESTER_CONTENT:0 "Мне это, возможно, не нужно"
+    SAME_FAITH:0 "Одна вера"
+    SAME_CULTURE:0 "Одна культура"
+    WEAK_HOOK_REASON:0 "Использовать слабую услугу"
+    REQUEST_TURN_WEAK_HOOK:0 "Использовать слабую услугу"
+    strong_test_hook:0 "Сильная услуга"
+
+# Opinion Modifiers for turn request
+    granted_vampirism_opinion:0 "Даровал обращение"
+    refused_vampirism_opinion:0 "Отказал в обращении"
+    new_childe_opinion:0 "Мой новый дитя вампир"
+
+# Events for turn request
+    vampire_turn_request.0001.t:0 "Просьба о тёмном даре"
+    vampire_turn_request.0001.desc_high_opinion:0 "[actor.GetTitledFirstName] обращается к вам с просьбой, которую мало кто из смертных осмелился бы произнести. Их уважение и преданность к вам возросли настолько, что теперь они ищут высшую награду — вечность рядом с вами."
+    vampire_turn_request.0001.desc_strong_hook:0 "[actor.GetTitledFirstName] просит обратить его, и у него есть рычаг давления, который затрудняет отказ. Вы задолжали ему услугу, и теперь он требует за неё бессмертие."
+    vampire_turn_request.0001.desc_gold_payment:0 "[actor.GetTitledFirstName] предлагает вам тысячу золотых монет — цену за ваше обращение, способное изменить его жизнь навсегда."
+    vampire_turn_request.0001.desc_insufficient:0 "[actor.GetTitledFirstName] отчаянно просит обратить его, но не предлагает ничего взамен, кроме мольбы. Шансы на успех малы, но отчаяние толкает его попробовать."
+    vampire_turn_request.0001.a:0 "Ты мне нравишься, так что почему бы и нет."
+    vampire_turn_request.0001.b:0 "Я не могу отказаться от того, что тебе должен. Хорошо."
+    vampire_turn_request.0001.c:0 "Такое золото стоит обращения. Будет по-твоему."
+    vampire_turn_request.0001.d:0 "Нет. Убирайся, пока я не передумал и не убил тебя."
+
+    vampire_turn_request.0002.t:0 "Пробуждение тьмы"
+    vampire_turn_request.0002.desc:0 "Преображение завершено. Сила бурлит в ваших венах, чувства обострились до немыслимого уровня. Мир уже никогда не будет прежним. Вы больше не человек. Вы — вампир."
+    vampire_turn_request.0002.a:0 "Я принимаю эту силу. Я больше, чем был смертным."
+    vampire_turn_request.0002.b:0 "Что это… Вот таково быть вампиром?"
+    vampire_turn_request.0002.c:0 "Неплохо. Посмотрим, что я смогу с этим сделать."
+
+    vampire_turn_request.0003.t:0 "Дар отвергнут"
+    vampire_turn_request.0003.desc:0 "[actor.GetTitledFirstName] отказал вам в просьбе об обращении. Жгучее чувство отвержения напоминает, что бессмертие и сила были так близко, но недоступны."
+    vampire_turn_request.0003.a:0 "Понимаю. Возможно, это не моё предназначение."
+    vampire_turn_request.0003.b:0 "Я этого не забуду."
+
+# Vampire Feeding Interaction Localization
+    vampire_feeding_interaction:0 "Накормиться"
+    vampire_feeding_interaction_desc:0 "Питайтесь кровью этого человека, чтобы снять стресс и утолить жажду."
+    vampire_feeding_prisoner_interaction:0 "Высосать узника досуха"
+    vampire_feeding_prisoner_interaction_desc:0 "Полностью высосите кровь из узника и насладитесь своей истинной природой. Его смерть станет устрашающим примером для всех, кто посмеет вам противостоять."
+
+# Modifiers for vampire feeding
+    vampire_feeding_boost:0 "Недавнее кормление"
+    vampire_feeding_boost_desc:0 "Недавнее кормление усилило ваши сверхъестественные способности до предела."
+    blood_loss_weakness:0 "Потеря крови"
+    blood_loss_weakness_desc:0 "Этот персонаж ослаблен из-за потери крови."
+
+# Custom tooltips
+    vampire_feeding_same_location:0 "Вы должны находиться в одном месте с целью"
+    vampire_recently_fed:0 "Вы недавно кормились и пока не нуждаетесь в новой крови"
+    recently_fed:0 "Недавно кормился"
+
+# Death reason
+    death_drained_killer:0 "Истощён кровопотерей"
+
+# Intro event
+    tvampired.0001.t:0 "Ultimate Vampire Mod"
+    tvampired.0001.desc:0 "Добро пожаловать в мой мод о вампирах для Crusader Kings III!\n\nЭтот мод добавляет в игру самых логично реализованных вампиров. Испытайте бессмертие, сверхъестественные силы, родовые линии и драму, которая сопутствует сверхъестественному.\n\nПриготовьтесь к миру, где ночь принадлежит существам куда более древним и опасным, чем любой смертный правитель.\n\nНаслаждайтесь модом! Я начинающий модмейкер, так что прошу прощения за возможные ошибки и недочёты. То, что вы увидите — лишь основа. Если хотите редактировать, менять, добавлять или исправлять — милости прошу."
+    tvampired.0001.a:0 "Спасибо за мод!"
+
+# Vampire Army
+    vampire_army:0 "Вампирская армия"
+    vampire_army_flavor:0 "Грозная армия новообращённых вампиров, наводящая ужас на сердца врагов. Их сила и скорость делают их грозной силой на поле боя."
+
+# Decision to become an Original Vampire
+    become_original_vampire_decision:0 "Стать Первородным вампиром"
+    become_original_vampire_decision_desc:0 "Пришло время обрести бессмертие и силу за пределами человеческого понимания. С помощью ведьмы и древнего заклинания я могу пройти необратимое превращение, став Первородным вампиром — благословлённым и проклятым вечной жаждой крови."
+    become_original_vampire_decision_tooltip:0 "Вы можете начать ритуал превращения в Первородного вампира"
+
+# Confirmation
+    BECOME_ORIGINAL_VAMPIRE_DECISION_CONFIRM_TITLE:0 "Принять тьму?"
+    BECOME_ORIGINAL_VAMPIRE_DECISION_CONFIRM_DESC:0 "Вы уверены, что хотите пройти это необратимое превращение? Став Первородным вампиром, вы больше никогда не вернётесь к человеческой жизни."
+    BECOME_ORIGINAL_VAMPIRE_DECISION_CONFIRM_ACCEPT:0 "Принять бессмертие"
+    become_original_vampire_decision_confirm:0 "Начать ритуал"
+
+# Event
+    vampire_transformation.0001.t:0 "Преображение"
+    vampire_transformation.0001.desc:0 "Когда заклинания ведьмы стихли в ночи, я вонзил клинок в сердце. Дыхание оборвалось, душа покинула тело… \n\nКогда я проснулся, ведьма приготовила для меня кровь. Жажда поглотила все мысли — и я выпил, завершив обращение. \n\nВ тот миг всё изменилось: удары сердец звучали в каждом коридоре, запах крови наполнял воздух, а тьма раскрывалась в идеальной ясности. Но жажда осталась — неутолимая и вечная. Я больше не человек. Я Первородный вампир — бессмертный, могущественный и навсегда изменённый."
+    vampire_transformation.0001.a:0 "Я возродился"
+    vampire_transformation.0001.a.tt:0 "Вы стали Первородным вампиром"
+
+# Extra loc for Decision
+    any_close_family_member:0 "Есть близкий родственник, которому можно доверять:"
+    any_courtier_or_guest:0 "Есть друг в вашем дворе:"

@@ -1,0 +1,43 @@
+﻿namespace = vampire_transformation
+
+# Original Vampire Transformation Event
+vampire_transformation.0001 = {
+	type = character_event
+	title = vampire_transformation.0001.t
+	desc = vampire_transformation.0001.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	is_triggered_only = yes
+
+	immediate = {
+		add_trait = original_vampire
+		root = {
+			# Initialize vampire lifetime reset tracking
+			vampire_init_years_since_lifetime_reset = yes
+
+			# First, heal them completely
+			vampire_regenerative_healing = yes
+			vampire_initialize_visual_age = yes
+		}	
+		if = {
+			limit = { 
+				NOR = {
+					has_trait = beauty_good_1
+					has_trait = beauty_good_2
+					has_trait = beauty_good_3
+					has_trait = disfigured
+				}
+			}
+        	add_trait_force_tooltip = beauty_good_3  # Beautiful (highest level)
+    	}
+	}
+
+	option = {
+		name = vampire_transformation.0001.a
+		
+		custom_tooltip = vampire_transformation.0001.a.tt
+	}
+}

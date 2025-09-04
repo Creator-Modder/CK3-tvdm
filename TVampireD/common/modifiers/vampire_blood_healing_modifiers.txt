@@ -1,0 +1,12 @@
+﻿# Character modifiers for vampire blood healing system
+
+vampire_blood_dealer = {
+    icon = "vampire_blood_dealer"
+    
+    monthly_prestige = 1
+    monthly_piety = -0.5
+    
+    # Small diplomacy boost from being known as someone who can heal
+    diplomacy = 2
+}
+

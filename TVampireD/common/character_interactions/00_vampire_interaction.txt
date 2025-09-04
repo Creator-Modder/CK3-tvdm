@@ -1,0 +1,1467 @@
+﻿# Vampire Interactions
+# Place this file in: common/character_interactions/vampire_interactions.txt
+
+vampire_compulsion_interaction = {
+    category = interaction_category_friendly
+	
+
+    icon = "vampire_compulsion_interaction"
+	
+	desc = vampire_compulsion_interaction_desc
+	
+	interface_priority = 50
+	common_interaction = yes
+	
+	is_shown = {
+		scope:actor = { has_trait = vampire }
+		scope:recipient = {
+			NOR = {
+				has_trait = vampire
+				has_trait = original_vampire
+                has_trait = original_hybrid
+                #Other traits for the future (werewolves, witches, etc.)
+			}
+			is_alive = yes
+            OR = {
+                is_vassal_of = scope:actor
+                is_courtier_of = scope:actor
+                is_imprisoned_by = scope:actor
+                is_spouse_of = scope:actor
+                is_concubine_of = scope:actor
+                is_parent_of = scope:actor
+                is_child_of = scope:actor
+                is_sibling_of = scope:actor
+                is_knight_of = scope:actor
+                is_pool_guest_of = scope:actor
+                is_at_same_location = scope:actor
+                scope:actor = { is_pool_guest_of = scope:recipient }
+                AND = {
+                    is_pool_guest = yes
+                    scope:actor = { is_pool_guest = yes }
+                    host = { 
+                        any_pool_guest = { this = scope:actor }
+                        any_pool_guest = { this = scope:recipient }
+                    }
+                }
+            }
+		}
+	}
+	
+	is_valid = {
+		scope:recipient = { 
+			NOR = {
+			    has_trait = compelled  # Can't compel someone already compelled
+			    has_trait = original_compelled  # Can't compel someone already compelled by original
+		    }
+		}
+	}
+	
+	on_accept = {
+        scope:actor = {
+            # Add loyalty hook with proper syntax
+			add_hook = {
+				type = loyalty_hook
+				target = scope:recipient
+			}
+        }   
+		scope:recipient = {
+			# Add compelled trait
+			add_trait = compelled
+			
+            # Add a modifier that will remove the trait
+            hidden_effect = {
+                add_character_modifier = {
+                    modifier = remove_compelled_trait
+                    years = 40
+                }
+            }
+
+			# Add named opinion modifier
+			add_opinion = {
+				target = scope:actor             
+				modifier = compelled_opinion
+			}
+			
+			# Add stress loss (they're compelled, so they feel "better")
+			add_stress = minor_stress_impact_loss
+		}
+	}
+	
+	# This makes it automatically succeed
+	auto_accept = {
+		always = yes
+	}
+	
+	# AI will use this interaction
+    ai_frequency = 12
+    ai_potential = { has_trait = vampire }
+    ai_targets = {
+        ai_recipients = spouses
+        ai_recipients = children
+        ai_recipients = family
+        ai_recipients = dynasty
+        max = 6
+    }
+    ai_targets = {
+        ai_recipients = neighboring_rulers
+        ai_recipients = peer_vassals
+        ai_recipients = liege
+        max = 3
+    }
+    ai_targets = {
+        ai_recipients = guests
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = councillors
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = prisoners
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = realm_characters
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = activity_guests
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = courtiers
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = vassals
+        max = 5
+    }
+
+	ai_target_quick_trigger = {
+		adult = yes
+	}     
+	ai_will_do = {
+		base = 95
+        modifier = {
+            add = 25
+            scope:recipient = {
+                opinion = {
+                    target = scope:actor
+                    value < 1
+                }
+            }
+        }
+        modifier = {
+            add = -1000
+            scope:recipient = {
+                is_ai = no
+            }
+        }
+	}
+}
+
+# Original Vampire Compulsion Interaction
+
+original_vampire_compulsion_interaction = {
+    category = interaction_category_friendly
+	
+
+    icon = "original_vampire_compulsion_interaction"
+
+	desc = original_vampire_compulsion_interaction_desc
+	
+	# Add interaction icon
+	interface_priority = 60
+	common_interaction = yes
+	
+	is_shown = {
+		scope:actor = {
+            OR = {
+			    has_trait = original_vampire
+                has_trait = original_hybrid
+            }    
+		}
+		scope:recipient = {
+			# Original vampires can compel anyone except other original vampires
+			NOR = { 
+                has_trait = original_vampire 
+                has_trait = original_hybrid 
+            }
+            
+            # other supernatural beings (e.g., werewolves) that can't be compelled will be added later
+			is_alive = yes
+			OR = {
+                is_vassal_of = scope:actor
+                is_courtier_of = scope:actor
+                is_imprisoned_by = scope:actor
+                is_spouse_of = scope:actor
+                is_concubine_of = scope:actor
+                is_parent_of = scope:actor
+                is_child_of = scope:actor
+                is_sibling_of = scope:actor
+                is_knight_of = scope:actor
+                is_pool_guest_of = scope:actor
+                is_at_same_location = scope:actor
+                scope:actor = { is_pool_guest_of = scope:recipient }
+                AND = {
+                    is_pool_guest = yes
+                    scope:actor = { is_pool_guest = yes }
+                    host = { 
+                        any_pool_guest = { this = scope:actor }
+                        any_pool_guest = { this = scope:recipient }
+                    }
+                }
+            }
+		}
+	}
+	
+	is_valid = {
+		scope:recipient = { 
+			NOT = { has_trait = original_compelled }
+		}
+	}
+	
+	on_accept = {
+	    scope:actor = {
+		    add_hook = {
+			    type = loyalty_hook
+			    target = scope:recipient
+		    }
+        }     
+	    scope:recipient = {
+		 # Remove any existing compulsion first
+		    if = {
+			    limit = { has_trait = compelled }
+			    remove_trait = compelled
+            }    
+            # Add original compelled trait
+		    add_trait = original_compelled
+
+            # Add a modifier that will remove the trait
+            hidden_effect = {
+                add_character_modifier = {
+                    modifier = remove_original_compelled_trait
+                    years = 70
+                }
+            }
+
+            # Add named opinion modifier
+		    add_opinion = {
+			    target = scope:actor
+			    modifier = compelled_opinion
+		    }
+		
+		    # Add stress loss (they're compelled, so they feel "better")
+		    add_stress = minor_stress_impact_loss
+		}
+	}
+	
+	# This makes it automatically succeed
+	auto_accept = {
+		always = yes
+	}
+	
+	# AI will use this interaction
+	ai_frequency = 2
+    ai_potential = {
+        has_trait = original_vampire
+        has_trait = original_hybrid
+    }
+    ai_targets = {
+        ai_recipients = spouses
+        ai_recipients = children
+        ai_recipients = family
+        ai_recipients = dynasty
+        max = 6
+    }
+    ai_targets = {
+        ai_recipients = neighboring_rulers
+        ai_recipients = peer_vassals
+        ai_recipients = liege
+        max = 3
+    }
+    ai_targets = {
+        ai_recipients = guests
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = councillors
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = prisoners
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = realm_characters
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = activity_guests
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = courtiers
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = vassals
+        max = 5
+    }
+
+	ai_target_quick_trigger = {
+		adult = yes
+	}
+    ai_will_do = {
+		base = 100
+
+        modifier = {
+            add = 55
+            scope:recipient = {
+                opinion = {
+                    target = scope:actor
+                    value < 1
+                }
+            }
+        }
+		# More likely to use on vampires (showing dominance)
+		modifier = {
+			add = 70
+			scope:recipient = { has_trait = vampire }
+		}
+        modifier = {
+            add = -1000
+            scope:recipient = {
+                is_ai = no
+            }
+        }
+	}
+}
+
+# Turn Vampire Interactions
+
+turn_vampire_interaction = {
+    category = interaction_category_hostile
+    
+
+    icon = "turn_vampire_interaction"
+
+    desc = turn_vampire_interaction_desc
+
+    interface_priority = 70
+    common_interaction = yes
+
+    is_shown = {
+        scope:actor = {
+            OR = {
+                has_trait = vampire
+                has_trait = original_vampire
+                has_trait = original_hybrid
+            }
+            is_alive = yes
+            is_imprisoned = no
+        }
+        scope:recipient = {
+            NOR = { 
+                has_trait = original_vampire
+                has_trait = vampire
+                has_trait = original_hybrid
+                # other supernatural beings (e.g., werewolves) that can't be turned will be added later
+            }
+            is_alive = yes
+            is_adult = yes
+            age >= 18
+            is_pregnant = no
+            OR = {
+                is_vassal_of = scope:actor
+                is_courtier_of = scope:actor
+                is_imprisoned_by = scope:actor
+                is_spouse_of = scope:actor
+                is_concubine_of = scope:actor
+                is_parent_of = scope:actor
+                is_child_of = scope:actor
+                is_sibling_of = scope:actor
+                is_knight_of = scope:actor
+                is_pool_guest_of = scope:actor
+                is_at_same_location = scope:actor
+                scope:actor = { is_pool_guest_of = scope:recipient }
+                AND = {
+                    is_pool_guest = yes
+                    scope:actor = { is_pool_guest = yes }
+                    host = { 
+                        any_pool_guest = { this = scope:actor }
+                        any_pool_guest = { this = scope:recipient }
+                    }
+                }
+            }
+        }
+    }
+    on_accept = {
+        scope:actor = {
+            # Remove loyalty hook with proper syntax
+            remove_hook = {
+                type = loyalty_hook
+                target = scope:recipient
+            }
+        }
+        scope:recipient = {
+            # Add vampire trait with sire reference
+            turn_into_vampire = { SIRE = scope:actor }
+
+            # Remove compelled trait if present
+            remove_trait = compelled
+            remove_trait = original_compelled
+
+            # Add stress loss (they're turned, so they feel "better")
+            add_stress = minor_stress_impact_gain
+        }
+    }
+    # This makes it automatically succeed
+    auto_accept = {
+        always = yes
+    }
+    # AI will use this interaction
+    ai_frequency = 36
+
+    ai_potential = { 
+        has_trait = vampire
+        has_trait = original_vampire
+        has_trait = original_hybrid
+    }
+    ai_targets = {
+        ai_recipients = spouses
+        ai_recipients = children
+        ai_recipients = family
+        ai_recipients = dynasty
+        max = 6
+    }
+    ai_targets = {
+        ai_recipients = courtiers
+        max = 4
+    }
+    ai_targets = {
+        ai_recipients = realm_characters
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = vassals
+        max = 5
+    }
+
+	ai_target_quick_trigger = {
+		adult = yes
+	}
+    ai_will_do = {
+        base = 100
+        # More likely to use on characters that are friendly or have a high opinion of the vampire
+        modifier = {
+            add = 55
+            scope:recipient = {
+                opinion = {
+                    target = scope:actor
+                    value > 80
+                }
+                OR = {
+                    has_relation_friend = scope:actor
+                    has_relation_lover = scope:actor
+                }
+            }
+        }
+        modifier = {
+            add = -1000
+            scope:recipient = {
+                is_ai = no
+            }
+        }
+    }
+}
+
+
+offer_vampire_blood_healing = {
+    category = interaction_category_friendly
+    
+    icon = "vampire_blood_for_healing"
+    
+    desc = offer_vampire_blood_healing_desc
+    
+    interface_priority = 60
+    common_interaction = yes
+    
+    is_shown = {
+        scope:actor = {
+            OR = {
+                has_trait = vampire
+                has_trait = original_vampire
+                has_trait = original_hybrid
+            }
+            is_alive = yes
+            is_imprisoned = no
+        }
+        scope:recipient = {
+            # Must be human (not supernatural)
+            NOR = {
+                has_trait = vampire
+                has_trait = original_vampire
+                has_trait = original_hybrid
+            }
+            is_alive = yes
+            vampire_has_healable_condition = yes
+        }
+    }
+    
+    is_valid_showing_failures_only = {
+        scope:actor = {
+            is_alive = yes
+        }
+        scope:recipient = {
+            is_alive = yes
+            # Check if they're within interaction range
+            OR = {
+                # Direct relationships
+                is_vassal_of = scope:actor
+                is_courtier_of = scope:actor
+                is_spouse_of = scope:actor
+                is_concubine_of = scope:actor
+                is_parent_of = scope:actor
+                is_child_of = scope:actor
+                is_sibling_of = scope:actor
+                is_knight_of = scope:actor
+                
+                # Location-based
+                is_at_same_location = scope:actor
+                is_pool_guest_of = scope:actor
+                scope:actor = { is_pool_guest_of = scope:recipient }
+                
+                # Same court as pool guests
+                AND = {
+                    is_pool_guest = yes
+                    scope:actor = { is_pool_guest = yes }
+                    host = { 
+                        any_pool_guest = { this = scope:actor }
+                        any_pool_guest = { this = scope:recipient }
+                    }
+                }
+                
+                # Liege relationship
+                scope:actor = { is_vassal_of = scope:recipient }
+                
+                # Peer vassals (same liege)
+                AND = {
+                    exists = liege
+                    scope:actor = { exists = liege }
+                    liege = scope:actor.liege
+                }
+                
+                # Foreign rulers with bordering realms
+                AND = {
+                    is_ruler = yes
+                    scope:actor = { is_ruler = yes }
+                    any_neighboring_realm_same_rank_owner = { this = scope:actor }
+                }
+            }
+        }
+    }
+    
+    on_accept = {
+        # Trigger event for actor to choose what they want in return
+        scope:actor = {
+            trigger_event = vampire_blood_healing.0001
+        }
+    }
+    
+    # Cost and other mechanics can be added here
+    
+    ai_accept = {
+        base = 0
+        
+        # More likely to accept if they're desperate (very sick)
+        modifier = {
+            add = 50
+            scope:recipient = {
+                OR = {
+                    has_trait = cancer
+                    has_trait = bubonic_plague
+                    has_trait = leper
+                    has_trait = consumption
+                    has_trait = incapable
+                    has_trait = great_pox
+                    has_trait = pneumonic
+                    has_trait = measles
+                    has_trait = dysentery
+                    has_trait = typhus
+                }
+            }
+            desc = "Desperately needs healing"
+        }
+        
+        # More likely if they like the vampire
+        opinion_modifier = {
+            opinion_target = scope:actor
+            multiplier = 1.5
+        }
+        
+        # Less likely if they're suspicious
+        modifier = {
+            add = -30
+            scope:recipient = {
+                OR = {
+                    has_trait = paranoid
+                    has_trait = zealous
+                }
+            }
+            desc = "Suspicious of supernatural aid"
+        }
+        
+        # More likely if they're friends/family
+        modifier = {
+            add = 40
+            scope:recipient = {
+                OR = {
+                    is_close_family_of = scope:actor
+                    has_relation_friend = scope:actor
+                    has_relation_lover = scope:actor
+                }
+            }
+            desc = "Close relationship"
+        }
+    }
+    ai_frequency = 12
+    ai_potential = {
+        has_trait = vampire
+        has_trait = original_vampire
+        has_trait = original_hybrid
+    }
+    ai_targets = {
+        ai_recipients = spouses
+        ai_recipients = children
+        ai_recipients = family
+        ai_recipients = dynasty
+        max = 6
+    }
+    ai_targets = {
+        ai_recipients = neighboring_rulers
+        ai_recipients = peer_vassals
+        ai_recipients = liege
+        max = 3
+    }
+    ai_targets = {
+        ai_recipients = courtiers
+        max = 4
+    }
+    ai_targets = {
+        ai_recipients = realm_characters
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = vassals
+        max = 5
+    }
+
+	ai_target_quick_trigger = {
+		adult = yes
+	}
+    ai_will_do = {
+        base = 85
+        
+        # Vampires are more likely to offer to people they like
+        modifier = {
+            add = 20
+            scope:recipient = {
+                opinion = {
+                    target = scope:actor
+                    value > 25
+                }
+            }
+        }
+        
+        # More likely to offer to family/friends/lovers
+        modifier = {
+            add = 100
+            scope:recipient = {
+                OR = {
+                    is_close_family_of = scope:actor
+                    has_relation_friend = scope:actor
+                    has_relation_lover = scope:actor
+                    has_relation_best_friend = scope:actor
+                    has_relation_soulmate = scope:actor
+                }
+            }
+        }
+        modifier = {
+            add = 100 
+            scope:actor = {
+                gold < 0
+            }
+        }    
+    }
+}
+
+
+
+# Add this to your 00_vampire_interaction.txt file
+
+request_vampire_turn_interaction = {
+    category = interaction_category_friendly
+    icon = "request_vampire_turn_interaction"
+    
+    desc = request_vampire_turn_interaction_desc
+    
+    interface_priority = 60
+    common_interaction = yes
+    
+    is_shown = {
+        scope:actor = {
+            # Actor (requester) must be human
+            NOR = {
+                has_trait = vampire
+                has_trait = original_vampire
+                has_trait = original_hybrid
+            }
+            is_adult = yes
+            age >= 18
+            is_pregnant = no
+            is_imprisoned = no
+        }
+        scope:recipient = {
+            # Recipient must be a vampire
+            OR = {
+                has_trait = vampire
+                has_trait = original_vampire
+                has_trait = original_hybrid
+            }
+            is_alive = yes
+            # Must have some relationship/proximity
+            OR = {
+                is_vassal_of = scope:actor
+                is_courtier_of = scope:actor
+                scope:actor = { is_vassal_of = scope:recipient }
+                scope:actor = { is_courtier_of = scope:recipient }
+                is_spouse_of = scope:actor
+                is_concubine_of = scope:actor
+                is_parent_of = scope:actor
+                is_child_of = scope:actor
+                is_sibling_of = scope:actor
+                is_knight_of = scope:actor
+                scope:actor = { is_knight_of = scope:recipient }
+                is_pool_guest_of = scope:actor
+                scope:actor = { is_pool_guest_of = scope:recipient }
+                is_at_same_location = scope:actor
+                AND = {
+                    is_pool_guest = yes
+                    scope:actor = { is_pool_guest = yes }
+                    host = { 
+                        any_pool_guest = { this = scope:actor }
+                        any_pool_guest = { this = scope:recipient }
+                    }
+                }
+            }
+        }
+    }
+
+    is_valid_showing_failures_only = {
+        scope:actor = {
+            is_alive = yes
+        }
+        scope:recipient = {
+            is_alive = yes
+        }
+    }
+    
+    # Send options - these create the multiple choice interface
+    send_option = {
+        is_shown = {
+            scope:recipient = {
+                opinion = {
+                    target = scope:actor
+                    value >= 80
+                }
+            }
+        }
+        flag = high_opinion
+        localization = REQUEST_TURN_HIGH_OPINION
+    }
+    
+    send_option = {
+        is_valid = {
+            scope:actor = {
+                has_strong_hook = scope:recipient
+            }
+        }
+        flag = hook
+        localization = REQUEST_TURN_STRONG_HOOK
+    }
+    
+    send_option = {
+        is_shown = {
+            scope:actor = {
+                gold >= 1000
+            }
+        }
+        flag = gold_payment
+        localization = REQUEST_TURN_GOLD_PAYMENT
+    }
+
+    send_option = {
+        is_valid = {
+            scope:actor = {
+                has_weak_hook = scope:recipient
+            }
+        }
+        flag = weak_hook
+        localization = REQUEST_TURN_WEAK_HOOK
+    }
+    
+    
+    should_use_extra_icon = {
+        scope:actor = { has_usable_hook = scope:recipient }
+    }
+    extra_icon = "hook_icon"
+    
+    send_options_exclusive = no
+    
+    # Cost system
+    cost = {
+        gold = {
+            value = 0
+            if = {
+                limit = { scope:gold_payment = yes }
+                add = 1000
+                desc = GOLD_PAYMENT_COST
+            }
+        }
+    }
+    
+    on_accept = {
+        
+        # Use hook if hook option was chosen
+        if = {
+            limit = { scope:hook = yes }
+            scope:actor = {
+                use_hook = scope:recipient
+            }
+        }
+
+        if = {
+            limit = { scope:weak_hook = yes }
+            scope:actor = {
+                use_hook = scope:recipient
+            }
+        }
+
+        if = {
+            limit = { scope:gold_payment = yes }
+            scope:recipient = {
+                add_gold = 1000
+            }
+        }
+        
+        # Turn the requester into a vampire
+        scope:actor = {
+            turn_into_vampire = { SIRE = scope:recipient }
+            
+            # Add positive opinion toward sire
+            add_opinion = {
+                target = scope:recipient
+                modifier = granted_vampirism_opinion
+            }
+            
+            # Send success event
+            trigger_event = {
+                id = vampire_turn_request.0002
+                days = 1
+            }
+        }
+        
+        # Sire gains opinion of their new childe and stress
+        scope:recipient = {
+            add_opinion = {
+                target = scope:actor
+                modifier = new_childe_opinion
+            }
+        }
+        
+        # Send notification message to sire
+        scope:recipient = {
+            send_interface_message = {
+                type = event_generic_neutral
+                title = vampire_turn_request_accept_notification
+                right_icon = scope:actor
+                
+                show_as_tooltip = {
+                    scope:actor = {
+                        turn_into_vampire = { SIRE = scope:recipient }
+                    }
+                }
+            }
+        }
+    }
+    
+    # AI acceptance system (like invite to court)
+    ai_accept = {
+        base = -100
+        
+        # High opinion path
+        modifier = {
+            add = 135
+            scope:high_opinion = yes
+            scope:recipient = {
+                opinion = {
+                    target = scope:actor
+                    value >= 80
+                }
+            }
+            desc = "HIGH_OPINION_REASON"
+        }
+
+        modifier = {
+            add = 75
+            scope:weak_hook = yes
+            desc = "WEAK_HOOK_REASON"
+        }
+        
+        # Gold payment path
+        modifier = {
+            add = 120
+            scope:gold_payment = yes
+            desc = "GOLD_PAYMENT_REASON"
+        }
+        
+        # Close relationships boost acceptance
+        modifier = {
+            add = 105
+            has_relation_lover = scope:actor
+            desc = AI_YOUR_LOVER
+        }
+        
+        modifier = {
+            add = 105
+            has_relation_best_friend = scope:actor
+            desc = AI_YOUR_FRIEND
+        }
+        
+        modifier = {
+            add = 160
+            is_child_of = scope:actor
+            desc = AI_YOUR_CHILD
+        }
+        
+        modifier = {
+            add = 90
+            NOT = { is_child_of = scope:actor }
+            is_close_family_of = scope:actor
+            desc = AI_YOUR_RELATIVE
+        }
+        
+        modifier = {
+            add = 160
+            is_spouse_of = scope:actor
+            desc = AI_YOUR_SPOUSE
+        }
+        
+        # Personality modifiers
+        modifier = {
+            add = 15
+            has_trait = gregarious
+            desc = "GREGARIOUS_REASON"
+        }
+        
+        modifier = {
+            add = -25
+            has_trait = callous
+            desc = "CALLOUS_REASON"
+        }
+        
+        modifier = {
+            add = -30
+            has_trait = paranoid
+            desc = "PARANOID_REASON"
+        }
+        
+        modifier = {
+            add = 20
+            has_trait = ambitious
+            desc = "AMBITIOUS_REASON"
+        }
+        
+        # Trait compatibility with requester
+        modifier = {
+            add = 25
+            scope:actor = {
+                has_trait = ambitious
+            }
+            desc = "REQUESTER_AMBITIOUS"
+        }
+        
+        modifier = {
+            add = -15
+            scope:actor = {
+                has_trait = content
+            }
+            desc = "REQUESTER_CONTENT"
+        }
+        
+        # Cultural/faith considerations
+        modifier = {
+            add = 10
+            faith = scope:actor.faith
+            desc = "SAME_FAITH"
+        }
+        
+        modifier = {
+            add = 10
+            culture = scope:actor.culture
+            desc = "SAME_CULTURE"
+        }
+    }
+    
+    # Auto accept with hooks
+    auto_accept = {
+        custom_description = {
+            text = "spending_hook"
+            subject = scope:actor
+            object = scope:recipient
+            scope:hook = yes
+        }
+    }
+    
+    # AI likelihood to send this request
+    ai_frequency = 48
+    ai_potential = { NOT = { has_trait = vampire } }
+    ai_targets = {
+        ai_recipients = spouses
+        ai_recipients = children
+        ai_recipients = family
+        ai_recipients = dynasty
+        max = 6
+    }
+    ai_targets = {
+        ai_recipients = neighboring_rulers
+        ai_recipients = peer_vassals
+        ai_recipients = liege
+        max = 3
+    }
+    ai_targets = {
+        ai_recipients = courtiers
+        max = 4
+    }
+    ai_targets = {
+        ai_recipients = realm_characters
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = vassals
+        max = 5
+    }
+
+	ai_target_quick_trigger = {
+		adult = yes
+		prison = no
+	}
+    ai_will_do = {
+        base = 75
+        
+        modifier = {
+            add = 30
+            scope:recipient = {
+                opinion = {
+                    target = scope:actor
+                    value > 50
+                }
+            }
+        }
+        
+        modifier = {
+            add = 40
+            scope:actor = {
+                vampire_has_disease_or_injury = yes
+            }
+        }
+        
+        modifier = {
+            add = -20
+            scope:actor = {
+                age < 25
+            }
+        }
+        
+        modifier = {
+            add = 25
+            scope:actor = {
+                has_trait = ambitious
+            }
+        }
+        
+        modifier = {
+            add = -15
+            scope:actor = {
+                has_trait = content
+            }
+        }
+        
+        modifier = {
+            add = 50
+            scope:actor = {
+                has_usable_hook = scope:recipient
+            }
+        }
+        
+        modifier = {
+            add = 30
+            scope:actor = {
+                gold >= 1000
+            }
+        }
+    }
+}
+
+# File: common/character_interactions/vampire_feeding.txt
+
+# Simple feeding interaction for stress relief and stat boost
+vampire_feeding_interaction = {
+	category = interaction_category_hostile
+    icon = "vampire_feeding_interaction"
+	
+	common_interaction = yes
+	interface_priority = 100
+	
+	desc = vampire_feeding_interaction_desc
+	
+	is_shown = {
+		scope:actor = {
+			OR = {
+				has_trait = vampire
+				has_trait = original_vampire
+                has_trait = original_hybrid
+			}
+		}
+		scope:recipient = {
+			is_alive = yes
+            age >= 18
+			NOT = { has_trait = vampire }
+			NOT = { has_trait = original_vampire }
+            NOT = { has_trait = original_hybrid }
+			# Exclude family and friends - vampires won't hurt loved ones
+			
+            NOT = {
+                AND = {
+                    OR = {
+                        is_close_family_of = scope:actor
+                        has_relation_friend = scope:actor
+                        has_relation_lover = scope:actor
+                        has_relation_best_friend = scope:actor
+                    }
+                    scope:actor = {
+                        NOT = {
+                            OR = {
+                                has_trait = callous
+                                has_trait = sadistic
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+	
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			is_imprisoned = no
+			NOT = { has_character_flag = recently_fed }
+		}
+		scope:recipient = {
+			in_diplomatic_range = scope:actor
+		}
+		custom_description = {
+			text = "vampire_feeding_same_location"
+			scope:recipient = {
+				is_at_same_location = scope:actor
+			}
+		}
+        custom_description = {
+			text = "vampire_recently_fed"
+			scope:actor = { NOT = { has_character_flag = recently_fed } }
+		}
+	}
+	
+	can_send = {
+		scope:actor = {
+			is_adult = yes
+		}
+	}
+	
+	auto_accept = {
+		always = yes
+	}
+	
+	on_accept = {
+		scope:actor = {
+			# Remove stress
+			add_stress = medium_stress_impact_loss
+			
+			# Add feeding boost modifier
+			add_character_modifier = {
+				modifier = vampire_feeding_boost
+				years = 1
+			}
+			
+			# Add recently fed flag
+			add_character_flag = {
+				flag = recently_fed
+				years = 2
+			}
+		}
+		
+		scope:recipient = {
+			# Health penalty from blood loss
+			add_character_modifier = {
+				modifier = blood_loss_weakness
+				years = 1
+			}
+		}
+	}
+	ai_frequency = 12
+    ai_potential = {
+        has_trait = vampire
+        has_trait = original_vampire
+        has_trait = original_hybrid
+    }
+    ai_targets = {
+        ai_recipients = neighboring_rulers
+        ai_recipients = peer_vassals
+        ai_recipients = liege
+        max = 3
+    }
+    ai_targets = {
+        ai_recipients = courtiers
+        max = 4
+    }
+    ai_targets = {
+        ai_recipients = vassals
+        max = 5
+    }
+    ai_targets = {
+        ai_recipients = realm_characters
+        max = 9
+    }
+	ai_target_quick_trigger = {
+		adult = yes
+	}
+	ai_will_do = {
+		base = 90
+		
+		# More likely if stressed
+		modifier = {
+			add = 20
+			scope:actor = {
+				stress > 50
+			}
+		}
+		
+		# More likely if very stressed
+		modifier = {
+			add = 40
+			scope:actor = {
+				stress > 75
+			}
+		}
+
+        modifier = {
+            add = 75
+            scope:actor = {
+                stress > 100
+            }
+        }
+	}
+}
+
+# Feeding on prisoners - drains them to death
+vampire_feeding_prisoner_interaction = {
+	category = interaction_category_hostile
+    icon = "vampire_feeding_prisoner_interaction"
+	
+	common_interaction = yes
+	interface_priority = 100
+	
+	desc = vampire_feeding_prisoner_interaction_desc
+	
+	is_shown = {
+		scope:actor = {
+			OR = {
+				has_trait = vampire
+				has_trait = original_vampire
+                has_trait = original_hybrid
+			}
+		}
+		scope:recipient = {
+			is_alive = yes
+            age >= 18
+			is_imprisoned_by = scope:actor
+			NOT = { has_trait = vampire }
+			NOT = { has_trait = original_vampire }
+            NOT = { has_trait = original_hybrid }
+			# Exclude family and friends - vampires won't hurt loved ones
+			NOT = {
+                AND = {
+                    OR = {
+                        is_close_family_of = scope:actor
+                        has_relation_friend = scope:actor
+                        has_relation_lover = scope:actor
+                        has_relation_best_friend = scope:actor
+                    }
+                    scope:actor = {
+                        NOT = {
+                            OR = {
+                                has_trait = callous
+                                has_trait = sadistic
+                            }
+                        }
+                    }
+                }
+            }
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			is_adult = yes
+			NOT = { has_character_flag = recently_fed }
+		}
+	}
+	
+	can_send = {
+		scope:actor = {
+			is_adult = yes
+		}
+	}
+	
+	auto_accept = {
+        always = yes
+    }
+	
+	on_accept = {
+		scope:actor = {
+			# Remove stress
+			add_stress = major_stress_impact_loss
+			
+			# Add feeding boost modifier
+			add_character_modifier = {
+				modifier = vampire_feeding_boost
+				years = 1
+			}
+			
+			# Add dread like an execution
+			add_dread = 40
+			
+			# Add recently fed flag
+			add_character_flag = {
+				flag = recently_fed
+				years = 2
+			}
+		}
+		
+		scope:recipient = {
+			# Death by draining
+			death = {
+				death_reason = death_drained
+				killer = scope:actor
+			}
+		}
+	}
+    ai_frequency = 12
+    ai_potential = { 
+        has_trait = vampire
+        has_trait = original_vampire
+        has_trait = original_hybrid
+    }
+
+    ai_targets = {
+        ai_recipients = neighboring_rulers
+        ai_recipients = peer_vassals
+        ai_recipients = liege
+        max = 3
+    }
+    ai_targets = {
+        ai_recipients = courtiers
+        max = 4
+    }
+    ai_targets = {
+        ai_recipients = vassals
+        max = 5
+    }
+    ai_targets = {
+        ai_recipients = prisoners
+        max = 9
+    }
+    ai_targets = {
+        ai_recipients = realm_characters
+        max = 9
+    }
+	ai_target_quick_trigger = {
+		adult = yes
+		prison = yes
+	}
+	ai_will_do = {
+		base = 50
+		
+		# More likely if stressed
+		modifier = {
+			add = 15
+			scope:actor = {
+				stress > 50
+			}
+		}
+		
+		# More likely if very stressed
+		modifier = {
+			add = 30
+			scope:actor = {
+				stress > 75
+			}
+		}
+
+        modifier = {
+            add = 100
+            scope:actor = {
+                opinion = {
+                    target = scope:recipient
+                    value < 0
+                }
+            }
+        }
+
+        modifier = {
+            add = 150
+            scope:actor = {
+                has_relation_rival = scope:recipient
+            }
+        }
+
+        modifier = {
+            add = 75
+            scope:actor = {
+                stress > 100
+            }
+        }
+
+		# More likely if cruel
+		modifier = {
+			add = 20
+			scope:actor = {
+				has_trait = callous
+			}
+		}
+		
+		modifier = {
+			add = 30
+			scope:actor = {
+				has_trait = sadistic
+			}
+		}
+        modifier = {
+            add = -1000
+            scope:recipient = {
+                is_ai = no
+            }
+        }
+	}
+}

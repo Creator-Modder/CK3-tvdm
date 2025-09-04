@@ -1,0 +1,275 @@
+﻿# Vampire Scripted Effects for TVampireD Mod
+# Place this file in: common/scripted_effects/vampire_scripted_effects.txt
+
+####################################################
+#
+#	Vampire Lifestyle XP Tick Increase
+#
+####################################################
+add_vampire_lifestyle_xp_tick = {
+	if = {
+		limit = {
+			has_trait = vampire
+			has_trait_xp = {
+				trait = vampire
+				value < 100
+			}
+		}
+		add_trait_xp = {
+			trait = vampire
+			value = 1
+		}
+	}
+}
+
+# Effect to remove all diseases and ailments from a character
+vampire_remove_disease = {
+	if = {
+		limit = { has_trait = cancer }
+		remove_trait = cancer
+	}
+	if = {
+		limit = { has_trait = great_pox }
+		remove_trait = great_pox
+	}
+	if = {
+		limit = { has_trait = gout_ridden }
+		remove_trait = gout_ridden
+	}
+	if = {
+		limit = { has_trait = ill }
+		remove_trait = ill
+	}
+	if = {
+		limit = { has_trait = pneumonic }
+		remove_trait = pneumonic
+	}
+	if = {
+		limit = { has_trait = typhus }
+		remove_trait = typhus
+	}
+	if = {
+		limit = { has_trait = smallpox }
+		remove_trait = smallpox
+	}
+	if = {
+		limit = { has_trait = bubonic_plague }
+		remove_trait = bubonic_plague
+	}
+	if = {
+		limit = { has_trait = leper }
+		remove_trait = leper
+	}
+	if = {
+		limit = { has_trait = consumption }
+		remove_trait = consumption
+	}
+	if = {
+		limit = { has_trait = lovers_pox }
+		remove_trait = lovers_pox
+	}
+	if = {
+		limit = { has_trait = measles }
+		remove_trait = measles
+	}
+	if = {
+		limit = { has_trait = dysentery }
+		remove_trait = dysentery
+	}
+}
+
+# Effect to fully heal a character (diseases + physical ailments)
+vampire_regenerative_healing = {
+	vampire_remove_disease = yes
+	
+	# Remove physical ailments
+	if = {
+		limit = { has_trait = wounded_1 }
+		remove_trait = wounded_1
+	}
+	if = {
+		limit = { has_trait = wounded_2 }
+		remove_trait = wounded_2
+	}
+	if = {
+		limit = { has_trait = wounded_3 }
+		remove_trait = wounded_3
+	}
+	if = {
+		limit = { has_trait = scarred }
+		remove_trait = scarred
+	}
+	if = {
+		limit = { has_trait = maimed }
+		remove_trait = maimed
+	}
+	if = {
+		limit = { has_trait = one_eyed }
+		remove_trait = one_eyed
+	}
+	if = {
+		limit = { has_trait = one_legged }
+		remove_trait = one_legged
+	}
+	if = {
+		limit = { has_trait = disfigured }
+		remove_trait = disfigured
+	}
+	if = {
+		limit = { has_trait = blind }
+		remove_trait = blind
+	}
+	if = {
+		limit = { has_trait = ergotism }
+		remove_trait = ergotism
+	}
+	if = {
+		limit = { has_trait = beardless_eunuch }
+		remove_trait = beardless_eunuch
+	}
+	if = {
+		limit = { has_trait = eunuch_1 }
+		remove_trait = eunuch_1
+	}
+	if = {
+		limit = { has_trait = infirm }
+		remove_trait = infirm
+	}
+	if = {
+		limit = { has_trait = incapable }
+		remove_trait = incapable
+	}
+	if = {
+		limit = { has_character_modifier = gangrene_modifier }
+		remove_character_modifier = gangrene_modifier
+	}
+	if = {
+		limit = { has_character_modifier = infected_wound_modifier }
+		remove_character_modifier = infected_wound_modifier
+	}
+	if = {
+		limit = { has_character_modifier = malnourished_modifier }
+		remove_character_modifier = malnourished_modifier
+	}
+	if = {
+		limit = { has_character_modifier = obese_modifier }
+		remove_character_modifier = obese_modifier
+	}
+	if = {
+		limit = { has_character_modifier = blood_loss_weakness }
+		remove_character_modifier = blood_loss_weakness
+	}	
+}
+
+# Effect for turning someone into a vampire (includes healing)
+# Now requires $SIRE$ parameter to establish bloodline
+turn_into_vampire = {
+    # Store the sire reference
+    if = {
+        limit = { always = yes }  # This parameter should always be provided
+        set_variable = {
+            name = sire_character
+            value = $SIRE$
+        }
+		add_character_flag = has_sire
+    }
+
+    # Add vampire trait
+    add_trait = vampire
+	if = {
+		limit = { 
+			OR = {
+				has_trait = compelled
+				has_trait = original_compelled
+			}
+		}
+		remove_trait = compelled
+		remove_trait = original_compelled
+	}
+    # Initialize vampire XP tracking variable
+    set_variable = {
+        name = vampire_years_since_xp_gain
+        value = 0
+    }
+
+    # Add highest level beauty trait
+    if = {
+        limit = { 
+            NOR = {
+                has_trait = beauty_good_1
+                has_trait = beauty_good_2
+                has_trait = beauty_good_3
+            }
+        }
+        add_trait_force_tooltip = beauty_good_3  # Beautiful (highest level)
+    }
+
+    # Initialize vampire lifetime reset tracking
+    vampire_init_years_since_lifetime_reset = yes
+
+    # First, heal them completely
+    vampire_regenerative_healing = yes
+    vampire_initialize_visual_age = yes
+}
+
+# Set vampire visual age and lock it
+vampire_set_visual_age = {
+	set_variable = {
+		name = vampire_visual_age
+		value = $VISUALAGE$
+	}
+	set_immortal_age = var:vampire_visual_age
+}
+
+# Initialize vampire visual age when first turned
+vampire_initialize_visual_age = {
+	if = {
+		limit = {
+			NOT = { exists = var:vampire_visual_age }
+		}
+		# Set visual age to current age when turned (minimum 18, maximum 35)
+		if = {
+			limit = { age < 18 }
+			vampire_set_visual_age = { VISUALAGE = 18 }
+		}
+		else_if = {
+			limit = { age > 35 }
+			vampire_set_visual_age = { VISUALAGE = 35 }
+		}
+		else = {
+			vampire_set_visual_age = { VISUALAGE = age }
+		}
+	}
+}
+
+# Refresh vampire visual age (to prevent aging)
+vampire_refresh_visual_age = {
+	if = {
+		limit = {
+			exists = var:vampire_visual_age
+		}
+		set_immortal_age = var:vampire_visual_age
+	}
+	else = {
+		# Fallback if variable doesn't exist
+		vampire_initialize_visual_age = yes
+	}
+}
+
+
+remove_compelled_when_modifier_expires = {
+    if = {
+        limit = { 
+            has_trait = compelled
+            NOT = { has_character_modifier = remove_compelled_trait }
+        }
+        remove_trait = compelled
+    }
+    if = {
+        limit = { 
+            has_trait = original_compelled
+            NOT = { has_character_modifier = remove_original_compelled_trait }
+        }
+        remove_trait = original_compelled
+    }
+}
